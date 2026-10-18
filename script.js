@@ -388,7 +388,7 @@ for (let i = 1; i <= 20; i++) {
 
 // prompt and alert
 // let getname = prompt("what's your name?")
-// alert(`${getname} is your name`)
+// alert(${getname} is your name)
 
 // 1. BASIC FUNCTION
 
@@ -1582,3 +1582,44 @@ console.log(product.discountPrice(10));
 
 // Is example mein properties bhi hain aur methods bhi.
 // Ye real applications mein objects ka common use hai.
+
+// dom manipulation
+// html se element select krna 
+// text badalna
+// html badalna
+// css badalna
+// attrubute badalna
+// event listener
+
+// selected by id
+let selectedbyid = document.getElementById("abcd");
+console.dir(selectedbyid);
+// selected by class name
+let selectedbyclassname = document.getElementsByClassName("text");
+console.dir(selectedbyclassname);
+// selected by query selecter
+let selectedbyquery = document.querySelector("h1");
+console.dir(selectedbyquery);
+// selected by query all selecter
+let selectedbyqueryall = document.querySelectorAll("h1");
+console.dir(selectedbyqueryall);
+// change the text
+let h1 = document.getElementById("abcd");
+console.dir(h1);
+h1.textContent = "hello ibrahim kaise hu"; // you can use innerHTML, innerText, outerText, textContent
+// using innerhtml
+let text = document.getElementById("text");
+text.innerHTML = "<i>i am italian</i>";
+// text.hidden = true; 
+// what is attribue?
+// html ke tag mai ju lga hu rha hota hai aese src="script.js" uss pure ko attribue kahte hai
+// change the attribute value
+let atag = document.querySelector("a")
+console.log(a);
+atag.href = "https://www.google.com";
+// more ways to change the attribute value
+let a2tag = document.getElementById("a2tag")
+a2tag.setAttribute("href", "https://www.youtube.com");
+// set the image
+let img = document.querySelector("img")
+img.setAttribute("src", "https://yt3.ggpht.com/AUx3dptUzKSpPDvAZne4W_9z3f0wwnrR73DL7_qTqBoKrwM4mB7hfXWK1baxCG7Zgjcw1NC7=s88-c-k-c0x00ffffff-no-rj");
