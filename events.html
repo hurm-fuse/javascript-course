@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events and Event Listeners</title>
+
+    <style>
+        body {
+            background-color: crimson;
+            color: cornsilk;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        button, input {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        #box {
+            background-color: cornsilk;
+            color: crimson;
+            padding: 25px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .highlight {
+            background-color: yellow !important;
+            color: black !important;
+        }
+
+        p {
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 id="heading">Events and Event Listeners</h1>
+
+    <!-- click event -->
+    <button id="clickBtn">Click me</button>
+
+    <!-- double click event -->
+    <button id="doubleClickBtn">Double click me</button>
+
+    <!-- mouse events -->
+    <div id="box">
+        Mouse ko mere upar leke aa bhai!
+    </div>
+
+    <!-- input events -->
+    <input id="nameInput" type="text" placeholder="Apna naam likh">
+
+    <p id="inputOutput">Tera text yahan show hoga</p>
+
+    <!-- keyboard events -->
+    <input id="keyboardInput" type="text" placeholder="Keyboard test kar">
+
+    <p id="keyOutput">Keyboard event yahan show hoga</p>
+
+    <!-- form submit event -->
+    <form id="myForm">
+        <input id="emailInput" type="email" placeholder="Email likh" required>
+        <button type="submit">Submit form</button>
+    </form>
+
+    <p id="formOutput"></p>
+
+    <!-- event target and delegation -->
+    <h2>Event Delegation</h2>
+
+    <div id="parent">
+        <button class="childBtn">Button 1</button>
+        <button class="childBtn">Button 2</button>
+        <button class="childBtn">Button 3</button>
+    </div>
+
+    <!-- add and remove event listener -->
+    <h2>Remove Event Listener</h2>
+
+    <button id="startBtn">Start listener</button>
+    <button id="stopBtn">Stop listener</button>
+
+    <p id="listenerOutput">Listener abhi start nahi hua</p>
+
+    <script src="events.js"></script>
+
+</body>
+</html>

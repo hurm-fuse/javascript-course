@@ -1194,3 +1194,19 @@ console.log(h1.textContent);
 // =====================================================
 
 console.log("DOM manipulation complete!");
+
+// event means some action happen
+// event listener means you give reaction to action
+// for one click
+let eventh1 = document.getElementById("event-h1");
+eventh1.addEventListener("click", function(){
+    eventh1.style.color = "#111 "
+})
+// for double click 
+let eventp = document.getElementById("event-p");
+function eventpfunc(){
+    eventp.style.color = "yellow"
+}
+eventp.addEventListener("dblclick", eventpfunc)
+// REMOVE EVENT LISTENER
+eventp.removeEventListener("dblclick", eventpfunc);
