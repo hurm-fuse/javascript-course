@@ -1,27 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <style>
         body {
             background-color: crimson;
             color: cornsilk;
         }
+
+        .box {
+            background-color: cornsilk;
+            color: black;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .highlight {
+            background-color: gold;
+            color: black;
+        }
     </style>
 </head>
-
 <body>
+
     <h1 id="abcd">i am selected by id</h1>
+
     <h1 id="text">i am selected by classname</h1>
-    
+
     <a href="">go to google</a>
+
     <a id="a2tag" href="">go to youtube</a>
-    <img src="" alt="">
 
-    <script src="script.js "></script>
+    <img src="" alt="my image" id="myimage">
+
+    <div class="box" id="mybox">
+        <h2>DOM manipulation</h2>
+        <p class="text">i am first paragraph</p>
+        <p class="text">i am second paragraph</p>
+    </div>
+
+    <div class="box" id="newbox">
+        <h2>new elements</h2>
+    </div>
+
+    <script src="script.js"></script>
+
 </body>
-
 </html>

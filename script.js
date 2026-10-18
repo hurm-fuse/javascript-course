@@ -1,88 +1,69 @@
-// var, let, const
-// declaration and initialization
+// =====================================================
+// 1. VAR, LET, CONST
+// =====================================================
 
 var a;
 var b = 12;
-
-// var
 var c = 19;
-
-// var can be redeclared and reassigned
 var d = 12;
+
 d = 6;
 var d = 10;
 
-// let can be reassigned but not redeclared
 let age = 12;
 age = 13;
 
-// const cannot be reassigned
 const dulha = "labuba";
 const dulhan = "lady";
 
 console.log(dulha + " weds " + dulhan);
 
-// let and var reassignment
 let dulhabylet = "labuba";
 let dulhanbylet = "lady";
+
 dulhabylet = "harramzada";
 
 console.log(dulhabylet + " weds " + dulhanbylet);
 
 var dulhabyvar = "labuba";
 var dulhanbyvar = "lady";
+
 dulhabyvar = "harramzada";
 
 console.log(dulhabyvar + " weds " + dulhanbyvar);
 
-// reassignment
 let reassignment = 12;
 reassignment = 6;
 
-// redeclaration with var
 var redeclaration = 10;
 var redeclaration = 20;
 
 console.log(redeclaration);
 
-// temporal dead zone
-// console.log(e);
-// let e = 2;
+// =====================================================
+// 2. SCOPE
+// =====================================================
 
-// var hoisting
-console.log(f); // undefined
-var f = 1;
-
-console.log(g); // undefined
-var g = 15;
-
-// let and const are hoisted but remain in TDZ
-// console.log(hh);
-// let hh = 20;
-
-// console.log(ii);
-// const ii = 30;
-
-// scope (global, block, function)
 var globalVariable = 19;
 
 {
     var globalVariable = 20;
 }
 
-console.log(globalVariable); // 20
+console.log(globalVariable);
 
 let blockVariable = 10;
 
 {
     let blockVariable = 20;
-    console.log(blockVariable); // 20
+    console.log(blockVariable);
 }
 
-console.log(blockVariable); // 10
+console.log(blockVariable);
 
-// data types
-// primitive: string, number, boolean, undefined, null, symbol, bigint
+// =====================================================
+// 3. DATA TYPES
+// =====================================================
 
 let i = true;
 let j = false;
@@ -90,17 +71,15 @@ let j = false;
 console.log(i, j);
 
 let nothing = null;
-
 let k;
-console.log(k); // undefined
 
-// symbol: unique primitive value
+console.log(k);
+
 let u1 = Symbol("uid");
 let u2 = Symbol("uid");
 
-console.log(u1 === u2); // false
+console.log(u1 === u2);
 
-// objects
 let obj = {
     uid: 1,
     name: "ibrahim",
@@ -109,182 +88,192 @@ let obj = {
 };
 
 let no = Symbol("uid");
+
 obj[no] = 8595507101;
 
 console.log(obj[no]);
 
-// reference types: arrays, objects, functions
 let array = [1, 2, 3];
 let copyarray = array;
 
 copyarray.pop();
 
-console.log(array);     // [1, 2]
-console.log(copyarray); // [1, 2]
+console.log(array);
+console.log(copyarray);
 
-// actual shallow copy
 let originalArray = [1, 2, 3];
 let separateArray = [...originalArray];
 
 separateArray.pop();
 
-console.log(originalArray); // [1, 2, 3]
-console.log(separateArray); // [1, 2]
+console.log(originalArray);
+console.log(separateArray);
 
-// objects
 let objects = {
     username: "ibrahim"
 };
 
 let copyobjects = objects;
+
 copyobjects.username = "maaz";
 
-console.log(objects.username); // maaz
+console.log(objects.username);
 
-// dynamic typing
 let dynamictyping = 12;
+
 dynamictyping = true;
 dynamictyping = "ibrahim";
 dynamictyping = [1, 2, 3];
 dynamictyping = null;
 dynamictyping = undefined;
 
-// typeof quirks
-console.log(typeof a);    // undefined
-console.log(typeof b);    // number
-console.log(typeof c);    // number
-console.log(typeof d);    // number
-console.log(typeof NaN);  // number
+console.log(typeof a);
+console.log(typeof b);
+console.log(typeof c);
+console.log(typeof d);
+console.log(typeof NaN);
 
-// type coercion
-console.log(5 + "1"); // "51"
-console.log(5 - "1"); // 4
+// =====================================================
+// 4. TYPE COERCION, TRUTHY, FALSY, NaN
+// =====================================================
 
-// truthy and falsy values
-// Falsy: false, 0, -0, 0n, "", null, undefined, NaN
-// document.all is a special browser exception
+console.log(5 + "1");
+console.log(5 - "1");
 
-console.log(Boolean(0));          // false
-console.log(Boolean(""));         // false
-console.log(Boolean(null));       // false
-console.log(Boolean(undefined));  // false
-console.log(Boolean(NaN));        // false
-console.log(Boolean("ibrahim"));  // true
+console.log(Boolean(0));
+console.log(Boolean(""));
+console.log(Boolean(null));
+console.log(Boolean(undefined));
+console.log(Boolean(NaN));
+console.log(Boolean("ibrahim"));
 
-// NaN
 let nan = NaN;
-console.log(typeof nan); // number
 
-// arithmetic operators
-console.log(5 + 5);           // 10
+console.log(typeof nan);
+
+// =====================================================
+// 5. OPERATORS
+// =====================================================
+
+console.log(5 + 5);
 console.log("ibrahim " + "ahmad");
-console.log(10 - 5);          // 5
-console.log(5 * 5);           // 25
-console.log(10 / 5);          // 2
-console.log(13 % 5);          // 3 (remainder)
-console.log(5 ** 5);          // 3125
+console.log(10 - 5);
+console.log(5 * 5);
+console.log(10 / 5);
+console.log(13 % 5);
+console.log(5 ** 5);
 
-// comparison operators
-console.log(12 == "12");   // true
-console.log(12 === "12");  // false
+console.log(12 == "12");
+console.log(12 === "12");
 
-console.log(12 != 13);     // true
-console.log(12 != "12");   // false
+console.log(12 != 13);
+console.log(12 != "12");
 
-console.log(12 !== 13);    // true
-console.log(12 !== "12");  // true
+console.log(12 !== 13);
+console.log(12 !== "12");
 
-console.log(15 > 13);      // true
-console.log(15 < 13);      // false
-console.log(15 <= 15);     // true
-console.log(15 >= 15);     // true
+console.log(15 > 13);
+console.log(15 < 13);
+console.log(15 <= 15);
+console.log(15 >= 15);
 
-// assignment operators
 let equal2 = 10;
 
-console.log(equal2 += 3); // 13
-console.log(equal2 -= 5); // 8
-console.log(equal2 *= 5); // 40
-console.log(equal2 /= 5); // 8
-console.log(equal2 %= 5); // 3
+equal2 += 3;
+console.log(equal2);
 
-// logical operators
-console.log(true && true);   // true
-console.log(false && true);  // false
+equal2 -= 5;
+console.log(equal2);
 
-console.log(true || true);   // true
-console.log(false || true);  // true
+equal2 *= 5;
+console.log(equal2);
 
-console.log(!true);          // false
-console.log(!!12);           // true
-console.log(!!0);            // false
+equal2 /= 5;
+console.log(equal2);
 
-// unary operators
+equal2 %= 5;
+console.log(equal2);
+
+console.log(true && true);
+console.log(false && true);
+
+console.log(true || true);
+console.log(false || true);
+
+console.log(!true);
+console.log(!!12);
+console.log(!!0);
+
 let Unarya = 10;
 let Unaryb = -5;
 let Unaryc = true;
 let Unaryd = "Ibrahim";
 
-console.log(+Unarya);        // 10
-console.log(-Unarya);        // -10
-console.log(!Unaryc);        // false
-console.log(!false);         // true
+console.log(+Unarya);
+console.log(-Unarya);
+console.log(!Unaryc);
+console.log(!false);
 
-console.log(typeof Unarya);       // number
-console.log(typeof Unaryd);       // string
-console.log(typeof Unaryc);       // boolean
-console.log(typeof undefined);    // undefined
-console.log(typeof null);         // object
-console.log(typeof {});            // object
+console.log(typeof Unarya);
+console.log(typeof Unaryd);
+console.log(typeof Unaryc);
+console.log(typeof undefined);
+console.log(typeof null);
+console.log(typeof {});
 
-// increment
 let Unaryx = 5;
-console.log(++Unaryx); // 6
+
+console.log(++Unaryx);
 
 let Unaryy = 5;
-console.log(Unaryy++); // 5
-console.log(Unaryy);   // 6
 
-// decrement
+console.log(Unaryy++);
+console.log(Unaryy);
+
 let Unaryp = 5;
-console.log(--Unaryp); // 4
+
+console.log(--Unaryp);
 
 let Unaryq = 5;
-console.log(Unaryq--); // 5
-console.log(Unaryq);   // 4
 
-// ternary operator
+console.log(Unaryq--);
+console.log(Unaryq);
+
 console.log(12 > 13 ? "true" : "false");
 
-// instanceof
 let arr = [1, 2, 3];
 
-console.log(arr instanceof Array);  // true
-console.log(arr instanceof Object); // true
+console.log(arr instanceof Array);
+console.log(arr instanceof Object);
 
 let objj = {
     name: "Ibrahim"
 };
 
-console.log(objj instanceof Object); // true
-console.log(objj instanceof Array);  // false
+console.log(objj instanceof Object);
+console.log(objj instanceof Array);
 
 let date = new Date();
 
-console.log(date instanceof Date);   // true
-console.log(date instanceof Object); // true
+console.log(date instanceof Date);
+console.log(date instanceof Object);
 
-// q1: grade using ternary operator
+// =====================================================
+// 6. CONDITIONS, SWITCH, LOOPS
+// =====================================================
+
 let score = 78;
 
-let grade =
-    score >= 90 ? "A" :
-    score >= 75 ? "B" :
-    score >= 60 ? "C" : "Fail";
+let grade = score >= 90
+    ? "A"
+    : score >= 75
+    ? "B"
+    : score >= 60
+    ? "C"
+    : "Fail";
 
-console.log(grade); // B
+console.log(grade);
 
-// control flow: if, else if, else
 let loggedin = true;
 let admin = true;
 
@@ -296,7 +285,6 @@ if (!loggedin) {
     console.log("You are normal user");
 }
 
-// switch case
 let day = 3;
 
 switch (day) {
@@ -320,7 +308,6 @@ switch (day) {
         console.log("Invalid day");
 }
 
-// early return pattern
 function checkAge(age) {
     if (age < 18) {
         return "You cannot vote";
@@ -331,7 +318,6 @@ function checkAge(age) {
 
 console.log(checkAge(20));
 
-// q2: grade using if-else
 function getgrade(score) {
     if (score >= 90) {
         return "A";
@@ -344,14 +330,12 @@ function getgrade(score) {
     }
 }
 
-console.log(getgrade(90)); // A
+console.log(getgrade(90));
 
-// for loop
-for (let i = 1; i <= 10; i++) {
-    console.log(i);
+for (let loopI = 1; loopI <= 10; loopI++) {
+    console.log(loopI);
 }
 
-// while loop
 let start = 1;
 
 while (start < 33) {
@@ -359,7 +343,6 @@ while (start < 33) {
     start++;
 }
 
-// do-while loop
 let dowhilestart = 1;
 
 do {
@@ -367,77 +350,48 @@ do {
     dowhilestart++;
 } while (dowhilestart < 20);
 
-// if inside a loop with break
-for (let i = 1; i <= 20; i++) {
-    if (i === 19) {
+for (let loopJ = 1; loopJ <= 20; loopJ++) {
+    if (loopJ === 19) {
         console.log("19 is lucky number");
         break;
     }
 
-    console.log(i);
+    console.log(loopJ);
 }
 
-// if inside a loop with continue
-for (let i = 1; i <= 20; i++) {
-    if (i === 19) {
+for (let loopK = 1; loopK <= 20; loopK++) {
+    if (loopK === 19) {
         continue;
     }
 
-    console.log(i);
+    console.log(loopK);
 }
 
-// prompt and alert
-// let getname = prompt("what's your name?")
-// alert(${getname} is your name)
-
-// 1. BASIC FUNCTION
-
-// function keyword se function banate hain.
-// sayHello function ka naam hai.
+// =====================================================
+// 7. FUNCTIONS
+// =====================================================
 
 function sayHello() {
     console.log("Hello Ibrahim");
 }
 
-// Function banane se code turant execute nahi hota.
-// Function ko chalane ke liye call karna padta hai.
-
-sayHello(); // Output: Hello Ibrahim
-sayHello(); // Output: Hello Ibrahim
-
-// 2. FUNCTION WITH PARAMETERS
-
-// Parameters function ke input variables hote hain.
-// name ek parameter hai.
+sayHello();
+sayHello();
 
 function greet(name) {
     console.log("Hello " + name);
 }
 
-// "Ibrahim" argument hai.
-// Argument woh actual value hai jo function ko dete hain.
-
-greet("Ibrahim"); // Hello Ibrahim
-greet("Ali");     // Hello Ali
-greet("Maaz");    // Hello Maaz
-
-// 3. MULTIPLE PARAMETERS
-
-// Function multiple inputs le sakta hai.
+greet("Ibrahim");
+greet("Ali");
+greet("Maaz");
 
 function add(a, b) {
     console.log(a + b);
 }
 
-// a = 10 aur b = 20
-add(10, 20); // Output: 30
-
-add(5, 7); // Output: 12
-
-// 4. RETURN
-
-// return function se result bahar bhejta hai.
-// Result ko variable mein store kar sakte hain.
+add(10, 20);
+add(5, 7);
 
 function sum(a, b) {
     return a + b;
@@ -445,29 +399,20 @@ function sum(a, b) {
 
 let result = sum(10, 20);
 
-console.log(result); // Output: 30
-
-// return ke baad function ka execution stop ho jata hai.
-// return ke baad likha code execute nahi hota.
+console.log(result);
 
 function test() {
     return 10;
-    console.log("Hello"); // Ye execute nahi hoga
+    console.log("Hello");
 }
 
-console.log(test()); // Output: 10
-
-// 5. CONSOLE.LOG VS RETURN
-
-// console.log() sirf output print karta hai.
+console.log(test());
 
 function firstFunction() {
     console.log(10 + 20);
 }
 
-firstFunction(); // Output: 30
-
-// return result ko function ke bahar deta hai.
+firstFunction();
 
 function secondFunction() {
     return 10 + 20;
@@ -475,26 +420,7 @@ function secondFunction() {
 
 let answer = secondFunction();
 
-console.log(answer); // Output: 30
-
-// 6. FUNCTION WITH CONDITIONS
-
-// Function ke andar if-else use kar sakte hain.
-
-function checkAge(age) {
-    if (age >= 18) {
-        return "You can vote";
-    } else {
-        return "You cannot vote";
-    }
-}
-
-console.log(checkAge(20)); // You can vote
-console.log(checkAge(15)); // You cannot vote
-
-// 7. EARLY RETURN PATTERN
-
-// Agar condition true ho, toh function turant return karega.
+console.log(answer);
 
 function checkNumber(num) {
     if (num < 0) {
@@ -508,77 +434,40 @@ function checkNumber(num) {
     return "Positive number";
 }
 
-console.log(checkNumber(-5)); // Negative number
-console.log(checkNumber(0));  // Zero
-console.log(checkNumber(8));  // Positive number
-
-// 8. FUNCTION EXPRESSION
-
-// Function ko variable mein store kar sakte hain.
+console.log(checkNumber(-5));
+console.log(checkNumber(0));
+console.log(checkNumber(8));
 
 const multiply = function(a, b) {
     return a * b;
 };
 
-console.log(multiply(4, 5)); // Output: 20
-
-// Note: function expression ko declaration se
-// pehle call nahi kar sakte jab variable const ho.
-
-// 9. ARROW FUNCTION
-
-// Arrow function likhne ka short method hai.
+console.log(multiply(4, 5));
 
 const subtract = (a, b) => {
     return a - b;
 };
 
-console.log(subtract(10, 4)); // Output: 6
-
-// 10. SHORT ARROW FUNCTION
-
-// Jab sirf ek expression return karna ho,
-// curly braces aur return hata sakte hain.
+console.log(subtract(10, 4));
 
 const square = num => num * num;
 
-console.log(square(5)); // Output: 25
-
-// Ye iske barabar hai:
-// const square = (num) => {
-//     return num * num;
-// };
-
-// 11. DEFAULT PARAMETERS
-
-// Agar argument nahi diya, toh default value use hogi.
+console.log(square(5));
 
 function welcome(name = "Guest") {
     console.log("Welcome " + name);
 }
 
-welcome("Ibrahim"); // Welcome Ibrahim
-welcome();          // Welcome Guest
-
-// 12. FUNCTION WITH ARRAY
-// Array ko function mein argument ke roop mein de sakte hain.
+welcome("Ibrahim");
+welcome();
 
 function printNumbers(numbers) {
-    for (let i = 0; i < numbers.length; i++) {
-        console.log(numbers[i]);
+    for (let index = 0; index < numbers.length; index++) {
+        console.log(numbers[index]);
     }
 }
 
 printNumbers([10, 20, 30]);
-
-// Output:
-// 10
-// 20
-// 30
-
-// 13. FUNCTION WITH OBJECT
-
-// Object ki properties function ke andar access kar sakte hain.
 
 function showUser(user) {
     console.log(user.name);
@@ -590,31 +479,18 @@ showUser({
     age: 14
 });
 
-// Output:
-// Ibrahim
-// 14
-
-// 14. REST PARAMETERS
-// ...numbers multiple arguments ko ek array mein
-// collect karta hai.
-
 function addAll(...numbers) {
     let total = 0;
 
-    for (let i = 0; i < numbers.length; i++) {
-        total += numbers[i];
+    for (let index = 0; index < numbers.length; index++) {
+        total += numbers[index];
     }
 
     return total;
 }
 
-console.log(addAll(1, 2, 3));       // 6
-console.log(addAll(10, 20, 30, 40)); // 100
-
-// 15. CALLBACK FUNCTION
-
-// Callback ek function hota hai jo doosre function
-// ko argument ke roop mein diya jata hai.
+console.log(addAll(1, 2, 3));
+console.log(addAll(10, 20, 30, 40));
 
 function processUser(name, callback) {
     callback(name);
@@ -625,11 +501,6 @@ function sayWelcome(name) {
 }
 
 processUser("Ibrahim", sayWelcome);
-
-// Output: Welcome Ibrahim
-
-// 16. FUNCTION INSIDE A FUNCTION
-// Ek function ke andar doosra function bana sakte hain.
 
 function outer() {
     console.log("Outer function");
@@ -643,14 +514,6 @@ function outer() {
 
 outer();
 
-// Output:
-// Outer function
-// Inner function
-
-// 17. RECURSION
-// Recursion mein function khud ko call karta hai.
-// Base case recursion ko stop karta hai.
-
 function countdown(n) {
     if (n === 0) {
         console.log("Done!");
@@ -658,164 +521,65 @@ function countdown(n) {
     }
 
     console.log(n);
-
     countdown(n - 1);
 }
 
 countdown(3);
 
-// Output:
-// 3
-// 2
-// 1
-// Done!
-
-// ==========================================
-// 1. ARRAY BASICS
-// ==========================================
-
-// Array ek variable mein multiple values store karta hai.
+// =====================================================
+// 8. ARRAYS
+// =====================================================
 
 let fruits = ["Apple", "Banana", "Mango"];
 
-// Array ka poora data print karo.
 console.log(fruits);
+console.log(fruits[0]);
+console.log(fruits[1]);
+console.log(fruits[2]);
 
-// Index se ek element access karte hain.
-// Array ka index 0 se start hota hai.
-
-console.log(fruits[0]); // Apple
-console.log(fruits[1]); // Banana
-console.log(fruits[2]); // Mango
-
-// ==========================================
-// 2. ARRAY LENGTH
-// ==========================================
-
-// length batata hai ki array mein kitne elements hain.
-
-console.log(fruits.length); // 3
-
-// Last element ka index length - 1 hota hai.
-console.log(fruits[fruits.length - 1]); // Mango
-
-// ==========================================
-// 3. CHANGE ARRAY ELEMENT
-// ==========================================
-
-// Index ki help se element change kar sakte hain.
+console.log(fruits.length);
+console.log(fruits[fruits.length - 1]);
 
 fruits[1] = "Orange";
 
-console.log(fruits);
-// ["Apple", "Orange", "Mango"]
-
-// ==========================================
-// 4. PUSH AND POP
-// ==========================================
-
-// push() array ke end mein element add karta hai.
-
 fruits.push("Grapes");
-
 console.log(fruits);
-// ["Apple", "Orange", "Mango", "Grapes"]
-
-// pop() last element remove karta hai.
 
 fruits.pop();
-
 console.log(fruits);
-// ["Apple", "Orange", "Mango"]
-
-// ==========================================
-// 5. UNSHIFT AND SHIFT
-// ==========================================
-
-// unshift() beginning mein element add karta hai.
 
 fruits.unshift("Pineapple");
-
 console.log(fruits);
-// ["Pineapple", "Apple", "Orange", "Mango"]
-
-// shift() first element remove karta hai.
 
 fruits.shift();
-
 console.log(fruits);
-// ["Apple", "Orange", "Mango"]
-
-// ==========================================
-// 6. INDEXOF AND INCLUDES
-// ==========================================
 
 let numbers = [10, 20, 30, 40];
 
-// indexOf() element ka index deta hai.
-console.log(numbers.indexOf(30)); // 2
+console.log(numbers.indexOf(30));
+console.log(numbers.indexOf(50));
 
-// Element nahi mila toh -1 deta hai.
-console.log(numbers.indexOf(50)); // -1
-
-// includes() check karta hai element present hai ya nahi.
-console.log(numbers.includes(20)); // true
-console.log(numbers.includes(99)); // false
-
-// ==========================================
-// 7. SLICE
-// ==========================================
-
-// slice() array ke selected elements ki copy deta hai.
-// Original array change nahi hota.
-
-// slice(start, end)
-// Start index included hai, end index excluded hai.
+console.log(numbers.includes(20));
+console.log(numbers.includes(99));
 
 let nums = [10, 20, 30, 40, 50];
 
 let selected = nums.slice(1, 4);
 
-console.log(selected); // [20, 30, 40]
-console.log(nums);     // [10, 20, 30, 40, 50]
-
-// ==========================================
-// 8. SPLICE
-// ==========================================
-
-// splice() original array ko change karta hai.
-
-// splice(startIndex, deleteCount)
+console.log(selected);
+console.log(nums);
 
 let values = [10, 20, 30, 40];
 
 values.splice(1, 2);
 
-// Index 1 se 2 elements remove ho gaye.
-console.log(values); // [10, 40]
-
-// ==========================================
-// 9. LOOP THROUGH AN ARRAY
-// ==========================================
+console.log(values);
 
 let marks = [80, 90, 75, 95];
 
-// Normal for loop se elements access karna.
-for (let i = 0; i < marks.length; i++) {
-    console.log(marks[i]);
+for (let index = 0; index < marks.length; index++) {
+    console.log(marks[index]);
 }
-
-// Output:
-// 80
-// 90
-// 75
-// 95
-
-// ==========================================
-// 10. FOR...OF LOOP
-// ==========================================
-
-// for...of directly array ki values deta hai.
 
 let names = ["Ibrahim", "Ali", "Maaz"];
 
@@ -823,27 +587,13 @@ for (let name of names) {
     console.log(name);
 }
 
-// ==========================================
-// 11. FOREACH
-// ==========================================
-
-// forEach() har element ke liye callback function chalata hai.
-
 let scores = [10, 20, 30];
 
 scores.forEach(function(score) {
     console.log(score);
 });
 
-// Arrow function ke saath:
 scores.forEach(score => console.log(score));
-
-// ==========================================
-// 12. MAP
-// ==========================================
-
-// map() har element par operation karke
-// ek naya array return karta hai.
 
 let oldNumbers = [1, 2, 3, 4];
 
@@ -851,15 +601,8 @@ let doubled = oldNumbers.map(function(num) {
     return num * 2;
 });
 
-console.log(doubled);   // [2, 4, 6, 8]
-console.log(oldNumbers); // [1, 2, 3, 4]
-
-// ==========================================
-// 13. FILTER
-// ==========================================
-
-// filter() condition pass karne wale elements
-// ka naya array banata hai.
+console.log(doubled);
+console.log(oldNumbers);
 
 let ages = [12, 18, 25, 15, 30];
 
@@ -867,27 +610,13 @@ let adults = ages.filter(function(age) {
     return age >= 18;
 });
 
-console.log(adults); // [18, 25, 30]
-
-// ==========================================
-// 14. FIND
-// ==========================================
-
-// find() pehla element return karta hai
-// jo condition pass karta hai.
+console.log(adults);
 
 let findNumbers = [5, 12, 18, 25];
 
 let found = findNumbers.find(num => num > 15);
 
-console.log(found); // 18
-
-// ==========================================
-// 15. REDUCE
-// ==========================================
-
-// reduce() array ki values ko combine karke
-// ek final result bana sakta hai.
+console.log(found);
 
 let prices = [100, 200, 300];
 
@@ -895,101 +624,45 @@ let totalPrice = prices.reduce(function(sum, price) {
     return sum + price;
 }, 0);
 
-// 0 initial value hai.
-// Har round mein price, sum mein add hota hai.
-
-console.log(totalPrice); // 600
-
-// ==========================================
-// 16. SPREAD OPERATOR
-// ==========================================
-
-// ... array ke elements ko spread karta hai.
-// Is tarah shallow copy bana sakte hain.
+console.log(totalPrice);
 
 let original = [1, 2, 3];
-
 let copied = [...original];
 
 copied.push(4);
 
-console.log(original); // [1, 2, 3]
-console.log(copied);   // [1, 2, 3, 4]
-
-// ==========================================
-// 17. MERGE ARRAYS
-// ==========================================
+console.log(original);
+console.log(copied);
 
 let firstArray = [1, 2];
 let secondArray = [3, 4];
 
 let mergedArray = [...firstArray, ...secondArray];
 
-console.log(mergedArray); // [1, 2, 3, 4]
-
-// ==========================================
-// 18. DESTRUCTURING
-// ==========================================
-
-// Destructuring se array ki values variables mein nikalte hain.
+console.log(mergedArray);
 
 let colors = ["Red", "Green", "Blue"];
 
 let [firstColor, secondColor, thirdColor] = colors;
 
-console.log(firstColor);  // Red
-console.log(secondColor); // Green
-console.log(thirdColor);  // Blue
-
-// ==========================================
-// 19. NESTED ARRAYS
-// ==========================================
-
-// Ek array ke andar doosra array ho sakta hai.
+console.log(firstColor);
+console.log(secondColor);
+console.log(thirdColor);
 
 let matrix = [
     [1, 2],
     [3, 4]
 ];
 
-// Pehla index outer array ko select karta hai.
-// Doosra index inner array ka element select karta hai.
+console.log(matrix[0][0]);
+console.log(matrix[0][1]);
+console.log(matrix[1][0]);
+console.log(matrix[1][1]);
 
-console.log(matrix[0][0]); // 1
-console.log(matrix[0][1]); // 2
-console.log(matrix[1][0]); // 3
-console.log(matrix[1][1]); // 4
+// =====================================================
+// 9. OBJECTS
+// =====================================================
 
-/*
-====================================================
-          JAVASCRIPT OBJECTS COMPLETE GUIDE
-====================================================
-
-OBJECT KYA HOTA HAI?
-
-Object ek aisa data structure hai jismein hum
-related information ko ek jagah store karte hain.
-
-Example:
-Ek student ka naam, age, class aur marks alag-alag
-variables mein rakhne ke bajaye, ek object mein rakh sakte hain.
-
-Object mein data KEY : VALUE pairs mein hota hai.
-
-Syntax:
-
-let objectName = {
-    key: value,
-    key: value
-};
-
-*/
-
-// ==================================================
-// 1. CREATING AN OBJECT
-// ==================================================
-
-// Ek student object create kiya.
 let student = {
     name: "Ibrahim",
     age: 14,
@@ -997,159 +670,69 @@ let student = {
     isLearningJavaScript: true
 };
 
-// name, age, class aur isLearningJavaScript
-// object ki KEYS (properties ke names) hain.
-
-// "Ibrahim", 14, 9 aur true unki VALUES hain.
-
-// Object ko print karne par poora object show hoga.
 console.log(student);
 
-// ==================================================
-// 2. ACCESSING OBJECT PROPERTIES
-// ==================================================
+console.log(student.name);
+console.log(student.age);
+console.log(student.class);
 
-// METHOD 1: DOT NOTATION
+console.log(student["name"]);
+console.log(student["age"]);
+console.log(student["class"]);
 
-// Object ka naam likho, phir dot, phir key.
-console.log(student.name);  // Ibrahim
-console.log(student.age);   // 14
-console.log(student.class); // 9
-
-// JavaScript student.name ko dekhega aur
-// name key ki value return karega.
-
-// METHOD 2: BRACKET NOTATION
-
-// Key ko square brackets aur quotes mein likhte hain.
-console.log(student["name"]);  // Ibrahim
-console.log(student["age"]);   // 14
-console.log(student["class"]); // 9
-
-// Dot notation aur bracket notation dono valid hain.
-
-// Bracket notation tab useful hota hai jab key ka naam
-// kisi variable mein stored ho.
 let propertyName = "name";
 
-console.log(student[propertyName]); // Ibrahim
-
-// IMPORTANT:
-// student.propertyName likhne par "propertyName" key
-// search hogi, variable ki value nahi.
-// Isliye dynamic key ke liye [] use karo.
-
-// ==================================================
-// 3. ADDING NEW PROPERTIES
-// ==================================================
-
-// Existing object mein new property add kar sakte hain.
+console.log(student[propertyName]);
 
 student.city = "Delhi";
 student.favoriteLanguage = "JavaScript";
-
-console.log(student);
-
-// Ab student object mein city aur favoriteLanguage
-// bhi available hain.
-
-// Bracket notation se bhi property add kar sakte hain.
 student["favoriteColor"] = "Black";
 
-console.log(student.favoriteColor); // Black
-
-// ==================================================
-// 4. UPDATING OBJECT PROPERTIES
-// ==================================================
-
-// Existing property ko new value assign karo.
+console.log(student.favoriteColor);
 
 student.age = 15;
 
-console.log(student.age); // 15
-
-// Pehle age 14 thi, ab 15 ho gayi.
-
-// Object ki property update karne ke liye
-// let student dobara likhne ki zaroorat nahi hai.
-
-// ==================================================
-// 5. DELETING OBJECT PROPERTIES
-// ==================================================
-
-// delete operator kisi property ko remove karta hai.
+console.log(student.age);
 
 delete student.favoriteColor;
 
-console.log(student.favoriteColor); // undefined
-
-// favoriteColor property ab object mein nahi hai.
-
-// Baaki properties delete nahi hongi.
+console.log(student.favoriteColor);
 console.log(student);
-
-// ==================================================
-// 6. OBJECT CAN STORE DIFFERENT DATA TYPES
-// ==================================================
 
 let profile = {
     username: "ibrahim",
     age: 14,
     isStudent: true,
     skills: ["HTML", "CSS", "JavaScript"],
+
     address: {
         city: "Delhi",
         country: "India"
     },
-    sayHello: function () {
+
+    sayHello: function() {
         console.log("Hello!");
     }
 };
 
-// Object mein strings, numbers, booleans,
-// arrays, doosre objects aur functions store ho sakte hain.
+console.log(profile.username);
+console.log(profile.skills);
+console.log(profile.skills[0]);
+console.log(profile.address.city);
 
-console.log(profile.username);        // ibrahim
-console.log(profile.skills);          // Array
-console.log(profile.skills[0]);       // HTML
-console.log(profile.address.city);    // Delhi
-
-// Nested object ka matlab object ke andar object.
-
-// skills ek array hai, isliye index use kiya.
-// address ek object hai, isliye city property access ki.
-
-profile.sayHello(); // Hello!
-
-// Object ke andar stored function ko method kehte hain.
-
-// ==================================================
-// 7. METHODS AND THE "this" KEYWORD
-// ==================================================
+profile.sayHello();
 
 let person = {
     name: "Ibrahim",
     age: 14,
 
-    introduce: function () {
-        // this current object ko refer karta hai
-        // jab method ko normal tareeke se call kiya jaye.
-
+    introduce: function() {
         console.log("My name is " + this.name);
         console.log("My age is " + this.age);
     }
 };
 
 person.introduce();
-
-// Output:
-// My name is Ibrahim
-// My age is 14
-
-// this.name ka matlab yahan person.name hai.
-// this.age ka matlab yahan person.age hai.
-
-// Modern JavaScript mein method shorthand bhi use hota hai.
 
 let anotherPerson = {
     name: "Ali",
@@ -1159,15 +742,10 @@ let anotherPerson = {
     }
 };
 
-anotherPerson.introduce(); // Hello, I am Ali
-
-// ==================================================
-// 8. OBJECTS WITH FUNCTIONS AND PARAMETERS
-// ==================================================
+anotherPerson.introduce();
 
 let calculator = {
     add(a, b) {
-        // a aur b function ke parameters hain.
         return a + b;
     },
 
@@ -1180,7 +758,6 @@ let calculator = {
     },
 
     divide(a, b) {
-        // Zero se divide karna avoid kar rahe hain.
         if (b === 0) {
             return "Cannot divide by zero";
         }
@@ -1189,19 +766,11 @@ let calculator = {
     }
 };
 
-console.log(calculator.add(10, 5));      // 15
-console.log(calculator.subtract(10, 5)); // 5
-console.log(calculator.multiply(10, 5)); // 50
-console.log(calculator.divide(10, 5));   // 2
-console.log(calculator.divide(10, 0));   // Error message
-
-// calculator object ke andar 4 methods hain.
-// calculator.add(10, 5) method ko call karta hai.
-// return calculated result wapas deta hai.
-
-// ==================================================
-// 9. CHECKING IF A PROPERTY EXISTS
-// ==================================================
+console.log(calculator.add(10, 5));
+console.log(calculator.subtract(10, 5));
+console.log(calculator.multiply(10, 5));
+console.log(calculator.divide(10, 5));
+console.log(calculator.divide(10, 0));
 
 let car = {
     brand: "Toyota",
@@ -1209,28 +778,16 @@ let car = {
     year: 2025
 };
 
-// "in" operator check karta hai ki property
-// object mein present hai ya nahi.
+console.log("brand" in car);
+console.log("color" in car);
 
-console.log("brand" in car); // true
-console.log("color" in car); // false
-
-// hasOwnProperty() bhi apni property check karta hai.
-
-console.log(car.hasOwnProperty("model")); // true
-console.log(car.hasOwnProperty("color")); // false
-
-// Property ki value undefined hone par bhi
-// property object mein exist kar sakti hai.
+console.log(car.hasOwnProperty("model"));
+console.log(car.hasOwnProperty("color"));
 
 car.color = undefined;
 
-console.log("color" in car); // true
-console.log(car.color);     // undefined
-
-// ==================================================
-// 10. OBJECT KE SAARE KEYS NIKALNA
-// ==================================================
+console.log("color" in car);
+console.log(car.color);
 
 let phone = {
     brand: "Apple",
@@ -1238,44 +795,9 @@ let phone = {
     price: 80000
 };
 
-// Object.keys() ek array return karta hai
-// jismein object ki apni enumerable keys hoti hain.
-
 console.log(Object.keys(phone));
-
-// Output:
-// ["brand", "model", "price"]
-
-// ==================================================
-// 11. OBJECT KI SAARI VALUES NIKALNA
-// ==================================================
-
-// Object.values() values ka array return karta hai.
-
 console.log(Object.values(phone));
-
-// Output:
-// ["Apple", "iPhone", 80000]
-
-// ==================================================
-// 12. KEYS AUR VALUES KO EK SAATH NIKALNA
-// ==================================================
-
-// Object.entries() har property ko
-// [key, value] pair ke roop mein deta hai.
-
 console.log(Object.entries(phone));
-
-// Output:
-// [
-//   ["brand", "Apple"],
-//   ["model", "iPhone"],
-//   ["price", 80000]
-// ]
-
-// ==================================================
-// 13. LOOP KE THROUGH OBJECT READ KARNA
-// ==================================================
 
 let laptop = {
     brand: "Apple",
@@ -1284,42 +806,14 @@ let laptop = {
     storage: "512GB"
 };
 
-// for...in loop object ki enumerable keys par chalta hai.
-
 for (let key in laptop) {
-    // key mein har baar ek property ka naam aayega.
-
     console.log(key);
-
-    // laptop[key] us key ki value dega.
     console.log(laptop[key]);
 }
-
-// Output mein har property ka naam aur value aayegi.
-
-// ==================================================
-// 14. OBJECT ENTRIES KE SAATH LOOP
-// ==================================================
-
-// Object.entries() se key aur value dono milte hain.
 
 for (let [key, value] of Object.entries(laptop)) {
     console.log(key + ": " + value);
 }
-
-// Example output:
-// brand: Apple
-// model: MacBook Air
-// ram: 16GB
-// storage: 512GB
-
-// Yahan destructuring use hui hai:
-// [key, value] har entry ke do parts ko alag variables
-// mein store karta hai.
-
-// ==================================================
-// 15. OBJECT KE ANDAR OBJECT
-// ==================================================
 
 let user = {
     name: "Ibrahim",
@@ -1331,61 +825,33 @@ let user = {
     }
 };
 
-console.log(user.address.city);    // Delhi
-console.log(user.address.country); // India
-
-// Pehle user ka address object access hua.
-// Phir us address object ki city property access hui.
-
-// ==================================================
-// 16. OBJECT KE ANDAR ARRAY
-// ==================================================
+console.log(user.address.city);
+console.log(user.address.country);
 
 let developer = {
     name: "Ibrahim",
     skills: ["HTML", "CSS", "JavaScript", "C"]
 };
 
-console.log(developer.skills[0]); // HTML
-console.log(developer.skills[1]); // CSS
-console.log(developer.skills[2]); // JavaScript
+console.log(developer.skills[0]);
+console.log(developer.skills[1]);
+console.log(developer.skills[2]);
 
-// skills ek array hai.
-// Array ke elements access karne ke liye indexes use hote hain.
-
-// Array mein new skill add karna:
 developer.skills.push("C++");
 
 console.log(developer.skills);
-
-// ==================================================
-// 17. COPYING AN OBJECT
-// ==================================================
 
 let originalObj = {
     name: "Ibrahim",
     age: 14
 };
 
-// Spread syntax se ek shallow copy banayi.
 let copyObj = { ...originalObj };
 
 copyObj.name = "Ali";
 
-console.log(originalObj.name); // Ibrahim
-console.log(copyObj.name);     // Ali
-
-// originalObj aur copyObj alag top-level objects hain.
-// Isliye copyObj.name change karne se originalObj.name
-// change nahi hota.
-
-// IMPORTANT:
-// Spread syntax shallow copy banati hai.
-// Nested objects ke liye reference share ho sakta hai.
-
-// ==================================================
-// 18. OBJECT ASSIGN
-// ==================================================
+console.log(originalObj.name);
+console.log(copyObj.name);
 
 let first = {
     name: "Ibrahim"
@@ -1396,20 +862,9 @@ let second = {
     city: "Delhi"
 };
 
-// Object.assign() properties ko target object mein copy karta hai.
 Object.assign(first, second);
 
 console.log(first);
-
-// Output:
-// { name: "Ibrahim", age: 14, city: "Delhi" }
-
-// Is example mein first target object tha,
-// isliye first update ho gaya.
-
-// ==================================================
-// 19. DESTRUCTURING AN OBJECT
-// ==================================================
 
 let studentInfo = {
     name: "Ibrahim",
@@ -1417,23 +872,15 @@ let studentInfo = {
     class: 9
 };
 
-// Destructuring object ki properties ko
-// alag variables mein nikalti hai.
+let {
+    name,
+    age: studentAge,
+    class: studentClass
+} = studentInfo;
 
-let { name, age: studentAge, class: studentClass } = studentInfo;
-
-console.log(name);         // Ibrahim
-console.log(studentAge);   // 14
-console.log(studentClass); // 9
-
-// class JavaScript ka reserved keyword hai,
-// isliye variable ka naam studentClass rakha.
-// class: studentClass ka matlab class ki value
-// ko studentClass variable mein store karna hai.
-
-// ==================================================
-// 20. SPREAD SYNTAX SE OBJECT MERGE KARNA
-// ==================================================
+console.log(name);
+console.log(studentAge);
+console.log(studentClass);
 
 let personal = {
     name: "Ibrahim",
@@ -1445,7 +892,6 @@ let education = {
     school: "My School"
 };
 
-// Dono objects ki properties ko ek new object mein merge kiya.
 let completeProfile = {
     ...personal,
     ...education
@@ -1453,105 +899,46 @@ let completeProfile = {
 
 console.log(completeProfile);
 
-// Output:
-// {
-//   name: "Ibrahim",
-//   age: 14,
-//   class: 9,
-//   school: "My School"
-// }
-
-// Agar dono objects mein same key ho,
-// toh baad wali value pehle wali ko overwrite kar sakti hai.
-
-// ==================================================
-// 21. OBJECT FREEZE
-// ==================================================
-
 let settings = {
     theme: "dark",
     language: "English"
 };
 
-// Object.freeze() object ki apni properties ko
-// add, delete ya change karne se rokta hai.
-
 Object.freeze(settings);
 
 settings.theme = "light";
 
-console.log(settings.theme); // dark
-
-// Normal non-strict execution mein assignment silently fail
-// ho sakta hai. Strict mode mein error aa sakta hai.
-
-// Freeze shallow hota hai. Nested objects automatically
-// freeze nahi hote.
-
-// ==================================================
-// 22. OBJECT SEAL
-// ==================================================
+console.log(settings.theme);
 
 let account = {
     username: "ibrahim",
     active: true
 };
 
-// Object.seal() new properties add karne aur
-// existing properties delete karne se rokta hai.
-// Existing writable properties update ho sakti hain.
-
 Object.seal(account);
 
-account.active = false; // Allowed
-account.city = "Delhi"; // Add nahi hogi
-delete account.username; // Delete nahi hoga
+account.active = false;
+account.city = "Delhi";
+delete account.username;
 
 console.log(account);
-
-// ==================================================
-// 23. OBJECT REFERENCE: IMPORTANT CONCEPT
-// ==================================================
 
 let objectA = {
     score: 100
 };
 
-// Yahan objectB ko objectA ki same object reference mili.
 let objectB = objectA;
 
 objectB.score = 200;
 
-console.log(objectA.score); // 200
-console.log(objectB.score); // 200
-
-// KYUN?
-// objectA aur objectB dono SAME object ko refer karte hain.
-// Isliye objectB ke through change karne par
-// objectA se bhi updated value milti hai.
-
-// ==================================================
-// 24. OPTIONAL CHAINING
-// ==================================================
+console.log(objectA.score);
+console.log(objectB.score);
 
 let customer = {
     name: "Ibrahim"
 };
 
-// customer.address exist nahi karta.
-// Direct customer.address.city likhne par error aayega.
-
-// Optional chaining ?. missing property par
-// crash hone ke bajaye undefined return kar sakti hai.
-
-console.log(customer.address?.city); // undefined
-
-// Ye nested properties ko safely access karne mein
-// helpful hota hai.
-
-// ==================================================
-// 25. PRACTICAL REAL-WORLD OBJECT
-// ==================================================
+console.log(customer.address?.city);
 
 let product = {
     id: 101,
@@ -1560,10 +947,7 @@ let product = {
     inStock: true,
 
     discountPrice(discountPercentage) {
-        // Original price se discount calculate karte hain.
         let discount = this.price * discountPercentage / 100;
-
-        // Final price return karte hain.
         return this.price - discount;
     },
 
@@ -1578,48 +962,235 @@ product.displayDetails();
 
 console.log(product.discountPrice(10));
 
-// 10% discount ke baad price: 89999.1
+// =====================================================
+// 10. DOM MANIPULATION
+// =====================================================
 
-// Is example mein properties bhi hain aur methods bhi.
-// Ye real applications mein objects ka common use hai.
-
-// dom manipulation
-// html se element select krna 
-// text badalna
-// html badalna
-// css badalna
-// attrubute badalna
-// event listener
+// HTML se element select karna
 
 // selected by id
 let selectedbyid = document.getElementById("abcd");
+
 console.dir(selectedbyid);
+
 // selected by class name
 let selectedbyclassname = document.getElementsByClassName("text");
+
 console.dir(selectedbyclassname);
-// selected by query selecter
+console.log(selectedbyclassname[0]);
+
+// selected by tag name
+let selectedbytagname = document.getElementsByTagName("p");
+
+console.dir(selectedbytagname);
+
+// selected by query selector
 let selectedbyquery = document.querySelector("h1");
+
 console.dir(selectedbyquery);
-// selected by query all selecter
+
+// selected by query all selector
 let selectedbyqueryall = document.querySelectorAll("h1");
+
 console.dir(selectedbyqueryall);
-// change the text
+
+// CSS selector se element select karna
+console.log(document.querySelector("#abcd"));
+console.log(document.querySelector(".text"));
+console.log(document.querySelector("#mybox .text"));
+
+// =====================================================
+// TEXT CHANGE KARNA
+// =====================================================
+
 let h1 = document.getElementById("abcd");
-console.dir(h1);
-h1.textContent = "hello ibrahim kaise hu"; // you can use innerHTML, innerText, outerText, textContent
-// using innerhtml
+
+h1.textContent = "hello ibrahim kaise hu";
+
+// innerHTML HTML tags ko bhi read karta hai
 let text = document.getElementById("text");
+
 text.innerHTML = "<i>i am italian</i>";
-// text.hidden = true; 
-// what is attribue?
-// html ke tag mai ju lga hu rha hota hai aese src="script.js" uss pure ko attribue kahte hai
-// change the attribute value
-let atag = document.querySelector("a")
-console.log(a);
+
+// innerText visible text deta hai
+console.log(h1.innerText);
+
+// textContent text ko read ya change karta hai
+console.log(h1.textContent);
+
+// =====================================================
+// STYLE CHANGE KARNA
+// =====================================================
+
+h1.style.color = "yellow";
+h1.style.backgroundColor = "black";
+h1.style.padding = "10px";
+h1.style.borderRadius = "8px";
+
+text.style.fontSize = "20px";
+
+// =====================================================
+// ATTRIBUTE CHANGE KARNA
+// =====================================================
+
+let atag = document.querySelector("a");
+
+console.log(atag);
+
 atag.href = "https://www.google.com";
-// more ways to change the attribute value
-let a2tag = document.getElementById("a2tag")
+
+atag.setAttribute("target", "_blank");
+atag.setAttribute("title", "Open Google");
+
+console.log(atag.getAttribute("href"));
+
+let a2tag = document.getElementById("a2tag");
+
 a2tag.setAttribute("href", "https://www.youtube.com");
-// set the image
-let img = document.querySelector("img")
-img.setAttribute("src", "https://yt3.ggpht.com/AUx3dptUzKSpPDvAZne4W_9z3f0wwnrR73DL7_qTqBoKrwM4mB7hfXWK1baxCG7Zgjcw1NC7=s88-c-k-c0x00ffffff-no-rj");
+
+a2tag.setAttribute("target", "_blank");
+
+console.log(a2tag.getAttribute("href"));
+
+// =====================================================
+// IMAGE KA SRC CHANGE KARNA
+// =====================================================
+
+let img = document.querySelector("img");
+
+img.setAttribute(
+    "src",
+    "https://placehold.co/300x150?text=New+Image"
+);
+
+img.setAttribute("alt", "New image");
+
+// =====================================================
+// CLASSLIST
+// =====================================================
+
+let mybox = document.getElementById("mybox");
+
+// class add karna
+mybox.classList.add("highlight");
+
+// class check karna
+console.log(mybox.classList.contains("highlight"));
+
+// class remove karna
+mybox.classList.remove("highlight");
+
+// class toggle karna
+mybox.classList.toggle("highlight");
+
+// =====================================================
+// ELEMENT CREATE KARNA
+// =====================================================
+
+let newParagraph = document.createElement("p");
+
+newParagraph.textContent = "i am a new paragraph";
+
+newParagraph.classList.add("text");
+
+document.getElementById("newbox").append(newParagraph);
+
+// append() element ko end mein add karta hai
+
+let secondParagraph = document.createElement("p");
+
+secondParagraph.textContent = "i am added at the end";
+
+document.getElementById("newbox").append(secondParagraph);
+
+// prepend() element ko start mein add karta hai
+
+let firstParagraph = document.createElement("p");
+
+firstParagraph.textContent = "i am added at the beginning";
+
+document.getElementById("newbox").prepend(firstParagraph);
+
+// =====================================================
+// ELEMENT BEFORE AND AFTER
+// =====================================================
+
+let beforeElement = document.createElement("p");
+
+beforeElement.textContent = "i am before the box";
+
+document.getElementById("newbox").before(beforeElement);
+
+let afterElement = document.createElement("p");
+
+afterElement.textContent = "i am after the box";
+
+document.getElementById("newbox").after(afterElement);
+
+// =====================================================
+// ELEMENT REMOVE KARNA
+// =====================================================
+
+// element ko remove karna
+// afterElement.remove();
+
+// parent se child remove karna
+// document.getElementById("newbox").removeChild(firstParagraph);
+
+// =====================================================
+// HIDE AND SHOW
+// =====================================================
+
+// image hide karna
+// img.hidden = true;
+
+// image show karna
+// img.hidden = false;
+
+// display none se hide karna
+// img.style.display = "none";
+
+// display block se show karna
+// img.style.display = "block";
+
+// =====================================================
+// HTML CONTENT REPLACE KARNA
+// =====================================================
+
+// innerHTML HTML ko bhi render karta hai
+// document.getElementById("newbox").innerHTML = "<h2>hello</h2>";
+
+// textContent sirf text ko render karta hai
+// document.getElementById("newbox").textContent = "hello";
+
+// =====================================================
+// CHILDREN SELECT KARNA
+// =====================================================
+
+let parent = document.getElementById("newbox");
+
+console.log(parent.children);
+
+console.log(parent.firstElementChild);
+
+console.log(parent.lastElementChild);
+
+console.log(parent.parentElement);
+
+// =====================================================
+// NODE AND ELEMENT INFORMATION
+// =====================================================
+
+console.log(h1.tagName);
+
+console.log(h1.id);
+
+console.log(h1.className);
+
+console.log(h1.textContent);
+
+// =====================================================
+// END
+// =====================================================
+
+console.log("DOM manipulation complete!");
