@@ -1422,3 +1422,53 @@ formvalidation.addEventListener("submit", function (event) {
     console.log("Gender:", gender);
     console.log("About:", about);
 });
+
+
+// timers and intervals
+// setTimeout ek baar callback chalata hai delay ke baad
+let timeoutText = document.getElementById("timeout-text");
+let timeoutBtn = document.getElementById("timeout-btn");
+let clearTimeoutBtn = document.getElementById("clear-timeout-btn");
+let timer;
+timeoutBtn.addEventListener("click", function () {
+    // Purana timeout pending ho toh use cancel karo
+    clearTimeout(timer);
+    timeoutText.textContent = "Please wait...";
+    // 3000 milliseconds = 3 seconds
+    timer = setTimeout(function () {
+        timeoutText.textContent = "Hello bhai, 3 seconds ho gaye!";
+    }, 3000);
+});
+clearTimeoutBtn.addEventListener("click", function () {
+    // Pending timeout ko cancel karta hai
+    clearTimeout(timer);
+    timeoutText.textContent = "Timeout cancelled!";
+});
+// setInterval callback ko baar-baar chalata hai
+let count = 0;
+let countText = document.getElementById("interval-count");
+let startIntervalBtn = document.getElementById("start-interval-btn");
+let stopIntervalBtn = document.getElementById("stop-interval-btn");
+let interval;
+startIntervalBtn.addEventListener("click", function () {
+    // Duplicate intervals banne se rokta hai
+    if (interval !== undefined) {
+        return;
+    }
+    interval = setInterval(function () {
+        count++;
+        countText.textContent = "Count: " + count;
+    }, 1000);
+});
+stopIntervalBtn.addEventListener("click", function () {
+    // Interval ko stop karta hai
+    clearInterval(interval);
+    interval = undefined;
+});
+// simple clock using setInterval
+let clock = document.getElementById("clock");
+let seconds = 0;
+setInterval(function () {
+    seconds++;
+    clock.textContent = "Clock: " + seconds + " seconds";
+}, 1000);
