@@ -1376,8 +1376,7 @@ child.addEventListener("click", function (details) {
     console.log("Child clicked");
 }, true);
 
-
-// form-validation
+// form and form validation
 let formvalidation = document.getElementById("form-validation");
 let nameInput = document.getElementById("name");
 let emailInput = document.getElementById("email");
