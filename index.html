@@ -7,6 +7,32 @@
     <title>Document</title>
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        #main {
+            padding-bottom: 50px;
+        }
+
+        #second-box {
+            background-color: #222;
+            width: 500px;
+            margin: 50px 50px 50px;
+        }
+
+        #second-box h1 {
+            color: aliceblue;
+            font-size: 100px;
+            text-align: center;
+        }
+
+        #second-box #file {
+            display: none;
+        }
+
         body {
             background-color: crimson;
             color: cornsilk;
@@ -23,37 +49,155 @@
             background-color: gold;
             color: black;
         }
+
+        /* #abcd-2{
+            position: absolute;
+            width: 100px;
+            padding: 100px;
+            background-color: black;
+        } */
+
+        .ul {
+            text-decoration: line-through;
+        }
+
+        #grandparent {
+            padding: 40px;
+            background-color: #1d4ed8;
+            border: 2px solid #60a5fa;
+            border-radius: 15px;
+        }
+
+        #parent {
+            margin-top: 20px;
+            padding: 35px;
+            background-color: #047857;
+            border: 2px solid #34d399;
+            border-radius: 15px;
+        }
+
+        #child {
+            display: block;
+            margin-top: 20px;
+            padding: 14px 25px;
+            background-color: #be185d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #child:hover {
+            background-color: #ec4899;
+        }
     </style>
 </head>
 
 <body>
 
-    <h1 id="abcd">i am selected by id</h1>
+    <div id="main">
+        <h1 id="abcd">i am selected by id</h1>
 
-    <h1 id="text">i am selected by classname</h1>
+        <h1 id="text">i am selected by classname</h1>
 
-    <a href="">go to google</a>
+        <a href="">go to google</a>
 
-    <a id="a2tag" href="">go to youtube</a>
+        <a id="a2tag" href="">go to youtube</a>
 
-    <img src="" alt="my image" id="myimage">
+        <img src="" alt="my image" id="myimage">
 
-    <div class="box" id="mybox">
-        <h2>DOM manipulation</h2>
-        <p class="text">i am first paragraph</p>
-        <p class="text">i am second paragraph</p>
+        <div class="box" id="mybox">
+            <h2>DOM manipulation</h2>
+            <p class="text">i am first paragraph</p>
+            <p class="text">i am second paragraph</p>
+        </div>
+
+        <div class="box" id="newbox">
+            <h2>new elements</h2>
+        </div>
+
+        <div class="event">
+            <h1 id="event-h1">click here</h1>
+            <p id="event-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus fugiat ullam consequatur
+                necessitatibus
+                optio adipisci, veritatis odit ipsam quasi aperiam, sunt et repellendus a! Et veritatis maiores aperiam
+                neque officia.</p>
+            <button id="removeBtn">Remove double-click listener in event-p</button>
+            <p id="eventp2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae est, dolor labore in
+                sit cumque,
+                consectetur pariatur maxime unde distinctio qui praesentium? Nihil quas obcaecati labore hic voluptas
+                expedita totam atque harum? Impedit eligendi vitae sequi hic architecto laudantium quasi ipsam culpa
+                optio
+                aspernatur dolorum possimus, quidem quae. Officia, ipsum.</p>
+            <input type="text" id="eventinput">
+            <div class="change-input">
+                <h3 id="device">Select your device</h3>
+                <select>
+                    <option selected disabled>choose your device</option>
+                    <option value="samsung">samsung</option>
+                    <option value="mi">mi</option>
+                    <option value="apple">apple</option>
+                    <option value="oppo">oppo</option>
+                </select>
+            </div>
+        </div>
     </div>
 
-    <div class="box" id="newbox">
-        <h2>new elements</h2>
+    <div id="second-box">
+        <h1 id="key-h1">1</h1>
+        <input id="file" type="file">
+        <button id="btn">Upload file</button>
+        <img id="preview-image" src="" alt="">
     </div>
 
-    <div class="event">
-        <h1 id="event-h1">click here</h1>
-        <p id="event-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus fugiat ullam consequatur necessitatibus
-            optio adipisci, veritatis odit ipsam quasi aperiam, sunt et repellendus a! Et veritatis maiores aperiam
-            neque officia.</p>
+    <div id="second-box">
+        <form id="second-form" action="">
+            <input type="text" placeholder="profile pic">
+            <input type="text" placeholder="name">
+            <input type="text" placeholder="email">
+            <input type="text" placeholder="age">
+            <input type="submit">
+        </form>
+        <hr>
     </div>
+
+    <div id="abcd-2"></div>
+
+    <ul>
+        <li>ibrahim</li>
+        <li>maaz</li>
+        <li>kafka</li>
+    </ul>
+
+    <div id="grandparent">
+        Grandparent
+
+        <div id="parent">
+            Parent
+
+            <button id="child">Click me</button>
+        </div>
+    </div>
+
+    <form id="form-validation">
+        <input type="text" id="name" placeholder="name">
+        <br><br>
+        <input type="email" id="email" placeholder="email">
+        <br><br>
+        <input type="password" id="password" placeholder="password">
+        <br><br>
+        <select id="gender">
+            <option value="male">male</option>
+            <option value="female">female</option>
+            <option value="other">other</option>
+        </select>
+        <br><br>
+        <textarea id="about" placeholder="tell us about yourself"></textarea>
+        <br><br>
+        <input type="submit" id="submit">
+        <p id="message"></p>
+    </form>
 
     <script src="script.js"></script>
 

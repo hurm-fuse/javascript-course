@@ -267,10 +267,10 @@ let score = 78;
 let grade = score >= 90
     ? "A"
     : score >= 75
-    ? "B"
-    : score >= 60
-    ? "C"
-    : "Fail";
+        ? "B"
+        : score >= 60
+            ? "C"
+            : "Fail";
 
 console.log(grade);
 
@@ -438,7 +438,7 @@ console.log(checkNumber(-5));
 console.log(checkNumber(0));
 console.log(checkNumber(8));
 
-const multiply = function(a, b) {
+const multiply = function (a, b) {
     return a * b;
 };
 
@@ -589,7 +589,7 @@ for (let name of names) {
 
 let scores = [10, 20, 30];
 
-scores.forEach(function(score) {
+scores.forEach(function (score) {
     console.log(score);
 });
 
@@ -597,7 +597,7 @@ scores.forEach(score => console.log(score));
 
 let oldNumbers = [1, 2, 3, 4];
 
-let doubled = oldNumbers.map(function(num) {
+let doubled = oldNumbers.map(function (num) {
     return num * 2;
 });
 
@@ -606,7 +606,7 @@ console.log(oldNumbers);
 
 let ages = [12, 18, 25, 15, 30];
 
-let adults = ages.filter(function(age) {
+let adults = ages.filter(function (age) {
     return age >= 18;
 });
 
@@ -620,7 +620,7 @@ console.log(found);
 
 let prices = [100, 200, 300];
 
-let totalPrice = prices.reduce(function(sum, price) {
+let totalPrice = prices.reduce(function (sum, price) {
     return sum + price;
 }, 0);
 
@@ -710,7 +710,7 @@ let profile = {
         country: "India"
     },
 
-    sayHello: function() {
+    sayHello: function () {
         console.log("Hello!");
     }
 };
@@ -726,7 +726,7 @@ let person = {
     name: "Ibrahim",
     age: 14,
 
-    introduce: function() {
+    introduce: function () {
         console.log("My name is " + this.name);
         console.log("My age is " + this.age);
     }
@@ -1199,14 +1199,227 @@ console.log("DOM manipulation complete!");
 // event listener means you give reaction to action
 // for one click
 let eventh1 = document.getElementById("event-h1");
-eventh1.addEventListener("click", function(){
+eventh1.addEventListener("click", function () {
     eventh1.style.color = "#111 "
 })
 // for double click 
 let eventp = document.getElementById("event-p");
-function eventpfunc(){
+function eventpfunc() {
     eventp.style.color = "yellow"
 }
 eventp.addEventListener("dblclick", eventpfunc)
 // REMOVE EVENT LISTENER
-eventp.removeEventListener("dblclick", eventpfunc);
+let removeBtn = document.getElementById("removeBtn");
+removeBtn.addEventListener("click", function () {
+    eventp.removeEventListener("dblclick", eventpfunc);
+    console.log("Double-click listener remove ho gaya!");
+});
+// all events type
+// click
+let eventp2 = document.getElementById("eventp2");
+eventp2.addEventListener("click", function () {
+    eventp2.style.color = "red";
+});
+// input
+let eventinput = document.getElementById("eventinput");
+eventinput.addEventListener("input", function (output) {
+    console.log("typed");
+    // if you wanted to know what user typed
+    if (output.data !== null) {
+        console.log(output.data);
+    }
+})
+// change event tab chalta hai jab aapka koi input select ya textarea mai change hojaye
+let select = document.querySelector("select");
+let device = document.getElementById("device")
+select.addEventListener("change", function (details) {
+    console.log(details.target.value);
+    device.textContent = `${details.target.value} device selected`
+})
+// keydown shows what key you press on fucking keyboard
+let keyboxh1 = document.getElementById("key-h1")
+window.addEventListener("keydown", function (details) {
+    keyboxh1.textContent = details.key;
+})
+// event listern for img
+let btn = document.querySelector("#btn");
+let file = document.querySelector("#file");
+let previewimage = document.querySelector("#preview-image");
+btn.addEventListener("click", function () {
+    file.click();
+})
+file.addEventListener("change", function (details) {
+    console.log(details.target.files[0].name);
+    btn.textContent = `${details.target.files[0].name}`;
+})
+// change complete
+
+// submit
+// STEP 1: Form ko select kiya
+let main = document.querySelector("#second-box");
+let form = document.querySelector("#second-form");
+// STEP 2: Form ke saare inputs select kiye
+let inputs = document.querySelectorAll("#second-form input");
+// STEP 3: Submit event listener lagaya
+form.addEventListener("submit", function (details) {
+    // Page reload hone se rokna
+    details.preventDefault();
+    // Tere inputs ka current order:
+    // inputs[0] = profile pic
+    // inputs[1] = name
+    // inputs[2] = email
+    // inputs[3] = age
+    console.log(
+        inputs[0].value,
+        inputs[1].value,
+        inputs[2].value,
+        inputs[3].value
+    );
+    // STEP 4: Card ka parent element create kiya
+    let card = document.createElement("div");
+    // Card ko CSS class di
+    card.classList.add("card")
+    // STEP 5: Profile container create kiya
+    let profile = document.createElement("div");
+    profile.classList.add("profile");
+    // STEP 6: Image element create kiya
+    let img = document.createElement("img");
+    // Input 0 se image ka URL set kiya
+    img.setAttribute("src", inputs[0].value);
+    // Image load na ho toh alternative text
+    img.setAttribute("alt", "Profile picture");
+    // STEP 7: Name element create kiya
+    let name = document.createElement("h2");
+    // Input 1 se name set kiya
+    name.textContent = inputs[1].value;
+    // STEP 8: Email element create kiya
+    let email = document.createElement("h2");
+    // Input 2 se email set kiya
+    email.textContent = inputs[2].value;
+    // STEP 9: Age element create kiya
+    let age = document.createElement("h2");
+    // IMPORTANT: Age inputs[3] mein hai
+    age.textContent = inputs[3].value;
+    // STEP 10: Saare elements profile ke andar add kiye
+    profile.appendChild(img);
+    profile.appendChild(name);
+    profile.appendChild(email);
+    profile.appendChild(age);
+    // STEP 11: Profile ko card ke andar add kiya
+    card.appendChild(profile);
+    // STEP 12: Card ko actual HTML page par add kiya
+    // form.parentElement woh #second-box hai
+    // jiske andar form already present hai.
+    main.appendChild(card);
+    // STEP 13: Form ko empty kar diya
+    form.reset();
+});
+
+// mouseover and mouseout
+let abcd2 = document.querySelector("#abcd-2");
+abcd2.addEventListener("mouseover", function () {
+    abcd2.style.backgroundColor = "yellow";
+})
+abcd2.addEventListener("mouseout", function () {
+    abcd2.style.backgroundColor = "#000";
+})
+
+// mousemove
+window.addEventListener("mousemove", function (details) {
+    console.log(details.clientX, details.clientY);
+
+    abcd2.style.top = details.clientY + "px";
+    abcd2.style.left = details.clientX + "px";
+});
+
+// event object
+let evtobjbtn = document.querySelector("#btn");
+// event listener
+evtobjbtn.addEventListener("click", function (event) {
+    // event object
+    console.log(event);
+    // event.type tells which event happened
+    console.log(event.type);
+    // event.target tells which element triggered the event
+    console.log(event.target);
+    // event.target.textContent tells the text of that element
+    console.log(event.target.textContent);
+    // event.clientX tells the mouse position on the screen horizontally
+    console.log(event.clientX);
+    // event.clientY tells the mouse position on the screen vertically
+    console.log(event.clientY);
+});
+
+// event bubbling
+let ul = document.querySelector("ul");
+ul.addEventListener("click", function (details) {
+    details.target.classList.toggle("ul");
+})
+
+// event capturing
+let grandparent = document.querySelector("#grandparent");
+let onlyparent = document.querySelector("#parent");
+let child = document.querySelector("#child");
+
+// grandparent ka capturing listener
+grandparent.addEventListener("click", function (details) {
+    console.log("Grandparent clicked");
+}, true);
+
+// parent ka capturing listener
+onlyparent.addEventListener("click", function (details) {
+    console.log("Parent clicked");
+}, true);
+
+// child ka capturing listener
+child.addEventListener("click", function (details) {
+    console.log("Child clicked");
+}, true);
+
+
+// form-validation
+let formvalidation = document.getElementById("form-validation");
+let nameInput = document.getElementById("name");
+let emailInput = document.getElementById("email");
+let passwordInput = document.getElementById("password");
+let genderInput = document.getElementById("gender");
+let aboutInput = document.getElementById("about");
+let message = document.getElementById("message");
+formvalidation.addEventListener("submit", function (event) {
+    // Page ko reload hone se rokta hai
+    event.preventDefault();
+    // Input ki values nikalna
+    let name = nameInput.value.trim();
+    let email = emailInput.value.trim();
+    let password = passwordInput.value;
+    let gender = genderInput.value;
+    let about = aboutInput.value.trim();
+    // Name validation
+    if (name === "") {
+        message.textContent = "Please enter your name";
+        return;
+    }
+    // Email validation
+    if (email === "") {
+        message.textContent = "Please enter your email";
+        return;
+    }
+    // Password validation
+    if (password.length < 8) {
+        message.textContent = "Password must be at least 8 characters";
+        return;
+    }
+    // About yourself validation
+    if (about === "") {
+        message.textContent = "Please tell us about yourself";
+        return;
+    }
+    // Agar saari validations pass ho gayi
+    message.textContent = "Form submitted successfully!";
+    // Submitted data console mein dekhna
+    console.log("Name:", name);
+    console.log("Email:", email);
+    console.log("Password:", password);
+    console.log("Gender:", gender);
+    console.log("About:", about);
+});
