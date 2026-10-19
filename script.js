@@ -1472,3 +1472,38 @@ setInterval(function () {
     seconds++;
     clock.textContent = "Clock: " + seconds + " seconds";
 }, 1000);
+
+// local storage -> aapke browser ke andar data store krne jo ki browser band hone par bhi delete nhi hoga
+// session storage -> ye aapka data temporarilry store krta hai mtlb ki tab band hua aur data gaya
+// cookies -> ye bhi data store krta hai and aapka data browser ke cookies naam ki property mai save hota hai and ye cookie concept kam data ya light data ke liye hota hai
+// local storage
+// store kaise krte hai
+localStorage.setItem("name","ibrahim");
+// data fetch kaise krte hai 
+localStorage.getItem("name");
+// remove kaise krte hai
+localStorage.removeItem("name");
+// update kaise krte hai
+localStorage.setItem("name","maaz");
+// store array in local storage
+localStorage.setItem("friends",JSON.stringify(["ibrahim","maaz","taklu"]));
+let friends = JSON.parse(localStorage.getItem("friends"));
+console.log(friends);
+// session storage
+// store kaise krte hai
+sessionStorage.setItem("name","ibrahim");
+// data fetch kaise krte hai 
+sessionStorage.getItem("name");
+// remove kaise krte hai
+sessionStorage.removeItem("name");
+// update kaise krte hai
+sessionStorage.setItem("name","maaz");
+// the differnce between session storage and local storage is when you relod the tab the session storage goes away but local storage not.
+// cookies
+// browser mein tiny data store krne ke liye cookies ka istemaal hota hai
+// cookies ~4kb
+// local storage session storage~5mb
+// cookies mein jo bhi data store kroge wo data page reload krne pai automaiticly server par jayega
+// store kaise krte hai
+document.cookie = "email=ibu@gmail.com";
+document.cookie = "age=14";
