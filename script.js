@@ -1478,26 +1478,26 @@ setInterval(function () {
 // cookies -> ye bhi data store krta hai and aapka data browser ke cookies naam ki property mai save hota hai and ye cookie concept kam data ya light data ke liye hota hai
 // local storage
 // store kaise krte hai
-localStorage.setItem("name","ibrahim");
+localStorage.setItem("name", "ibrahim");
 // data fetch kaise krte hai 
 localStorage.getItem("name");
 // remove kaise krte hai
 localStorage.removeItem("name");
 // update kaise krte hai
-localStorage.setItem("name","maaz");
+localStorage.setItem("name", "maaz");
 // store array in local storage
-localStorage.setItem("friends",JSON.stringify(["ibrahim","maaz","taklu"]));
+localStorage.setItem("friends", JSON.stringify(["ibrahim", "maaz", "taklu"]));
 let friends = JSON.parse(localStorage.getItem("friends"));
 console.log(friends);
 // session storage
 // store kaise krte hai
-sessionStorage.setItem("name","ibrahim");
+sessionStorage.setItem("name", "ibrahim");
 // data fetch kaise krte hai 
 sessionStorage.getItem("name");
 // remove kaise krte hai
 sessionStorage.removeItem("name");
 // update kaise krte hai
-sessionStorage.setItem("name","maaz");
+sessionStorage.setItem("name", "maaz");
 // the differnce between session storage and local storage is when you relod the tab the session storage goes away but local storage not.
 // cookies
 // browser mein tiny data store krne ke liye cookies ka istemaal hota hai
@@ -1507,3 +1507,266 @@ sessionStorage.setItem("name","maaz");
 // store kaise krte hai
 document.cookie = "email=ibu@gmail.com";
 document.cookie = "age=14";
+
+// scope - functional, global, block scope
+// functional scope - function ke andar hi use ho sakti hai
+// global scope - poore code mein kahi bhi use ho sakta hai 
+// block scope - {} curly braces mai hi use ho sakti hai
+let scopea = 10; // global scope
+function scopeb() {
+    let scopeb = 20; // functional scope
+}
+{
+    let scopec = 30; // block scope
+}
+
+// executation content
+// js sabse pahle jaise hi aapka function dekhta hai sabse pahle js bnata hai executation context , ya ek process hai jo do differnce phases mai chalta hai, memory phase and dossre ka naam hai executation phase
+function execution() {
+    var executationa = 12;
+    var executationb = 13;
+    var executationc = 15;
+}
+execution();
+
+// lexical scoping(js) -> ki aap kaha par phiscally available ho ye poori tareeke se depend krta hai ki aap kya access kro
+function lexical() {
+    let a = 12;
+    function defg() {
+        console.log(a);
+    }
+    return defg;
+}
+lexical();
+
+// dyanmic scoping -> kha se call kr rhe ho uspe depend krega ki kya value milegi (not follow in js)
+let india = "ghazwa e hind";
+function dyanmic() {
+    let india = "bharat";
+    dyanmicchild();
+}
+function dyanmicchild() {
+    console.log(india);
+}
+dyanmic();
+
+// closures hote hai functions jo ki kisi parent function ke andar ho aur andar wala function return ho rha ho and returning function use kre parent function ka koi variable use kre
+function closures() {
+    let closuresa = 12;
+    function child(params) {
+        console.log(closuresa);
+    }
+    return child;
+}
+closures();
+
+// 1. GLOBAL SCOPE
+console.log(this); // Browser ke normal script mein: window
+
+// 2. NORMAL FUNCTION
+function showThisValue() {
+    console.log(this);
+}
+showThisValue(); // Non-strict browser script mein: window
+// Strict mode / ES module mein: undefined
+
+// 3. OBJECT METHOD
+const studentObject = {
+    studentName: "Ibrahim",
+    studentAge: 14,
+    showStudentDetails() {
+        console.log(this); // studentObject
+        console.log(this.studentName); // Ibrahim
+        console.log(this.studentAge); // 14
+    }
+};
+studentObject.showStudentDetails();
+
+// 4. ARROW FUNCTION
+// Arrow function apna this nahi banata; surrounding scope se leta hai.
+const teacherObject = {
+    teacherName: "Ahmed",
+    showTeacherName: () => {
+        console.log(this.teacherName); // Usually undefined in a browser script
+    }
+};
+teacherObject.showTeacherName();
+
+// 5. FUNCTION SEPARATELY CALL KARNA
+const showStudentName = studentObject.showStudentDetails;
+showStudentName(); // Non-strict browser script: this = window
+// Strict mode / ES module: this = undefined
+
+// 6. CALL(): Manually this set karna.
+function showPersonName() {
+    console.log(this.personName);
+}
+const personObject = { personName: "Ali" };
+showPersonName.call(personObject); // Ali
+
+// 7. APPLY(): call() jaisa, arguments array mein pass hote hain.
+function introducePerson(city, country) {
+    console.log(`${this.personName} lives in ${city}, ${country}.`);
+}
+introducePerson.apply(personObject, ["Delhi", "India"]);
+
+// 8. BIND(): Naya function banata hai jiska this fix hota hai.
+const boundPersonFunction = introducePerson.bind(personObject, "Delhi", "India");
+boundPersonFunction();
+
+// 9. CONSTRUCTOR FUNCTION
+function StudentConstructor(studentName) {
+    this.studentName = studentName;
+}
+const newStudent = new StudentConstructor("Ibrahim");
+console.log(newStudent.studentName); // Ibrahim
+
+// 10. CLASS
+class Animal {
+    constructor(animalName) {
+        this.animalName = animalName;
+    }
+    showAnimalName() {
+        console.log(this.animalName);
+    }
+}
+const dogObject = new Animal("Bruno");
+dogObject.showAnimalName(); // Bruno
+
+// 11. NESTED NORMAL FUNCTION
+const schoolObject = {
+    schoolName: "Delhi School",
+    showSchoolName() {
+        function innerFunction() {
+            console.log(this); // Normal function: global object or undefined
+        }
+        innerFunction();
+    }
+};
+schoolObject.showSchoolName();
+
+// 12. ARROW FUNCTION INSIDE A METHOD
+const anotherStudent = {
+    studentName: "Ibrahim",
+    showNameLater() {
+        const arrowFunction = () => {
+            console.log(this.studentName); // Ibrahim
+        };
+        arrowFunction();
+    }
+};
+anotherStudent.showNameLater();
+
+// 1. OBJECT: Properties store data, methods perform actions.
+const studentObjectOOP = {
+    studentName: "Ibrahim",
+    studentAge: 14,
+    introduceStudent() {
+        console.log(`${this.studentName} is ${this.studentAge} years old.`);
+    }
+};
+studentObjectOOP.introduceStudent(); // Ibrahim is 14 years old.
+
+// 2. FACTORY FUNCTION: Creates and returns objects.
+function createStudent(studentName, studentAge) {
+    return { studentName, studentAge };
+}
+const firstStudent = createStudent("Ali", 15);
+
+// 3. CONSTRUCTOR FUNCTION: Creates objects using "new".
+function StudentConstructorOOP(studentName, studentAge) {
+    this.studentName = studentName;
+    this.studentAge = studentAge;
+}
+const secondStudent = new StudentConstructorOOP("Ahmed", 16);
+
+// 4. CLASS AND CONSTRUCTOR: A blueprint for creating objects.
+class Person {
+    constructor(personName, personAge) {
+        this.personName = personName;
+        this.personAge = personAge;
+    }
+    introducePerson() {
+        console.log(`${this.personName} is ${this.personAge} years old.`);
+    }
+}
+const personClassObject = new Person("Ibrahim", 14);
+personClassObject.introducePerson();
+
+// 5. INHERITANCE: A child class inherits from a parent class.
+class Student extends Person {
+    constructor(personName, personAge, studentSubject) {
+        super(personName, personAge); // Calls the parent constructor.
+        this.studentSubject = studentSubject;
+    }
+    studySubject() {
+        console.log(`${this.personName} studies ${this.studentSubject}.`);
+    }
+}
+const javascriptStudent = new Student("Ibrahim", 14, "JavaScript");
+javascriptStudent.introducePerson(); // Inherited method.
+javascriptStudent.studySubject();
+
+// 6. ENCAPSULATION: Private data is accessed through class methods.
+class BankAccount {
+    #accountBalance = 0; // Private property.
+
+    depositMoney(depositAmount) {
+        if (depositAmount > 0) this.#accountBalance += depositAmount;
+    }
+    get balance() {
+        return this.#accountBalance; // Getter.
+    }
+}
+const bankAccount = new BankAccount();
+bankAccount.depositMoney(500);
+console.log(bankAccount.balance); // 500
+
+// 7. POLYMORPHISM: Same method name, different behaviour.
+class AnimalPoly {
+    makeSound() {
+        console.log("Animal makes a sound.");
+    }
+}
+class Dog extends AnimalPoly {
+    makeSound() {
+        console.log("Dog barks."); // Method overriding.
+    }
+}
+const polyDogObject = new Dog();
+polyDogObject.makeSound(); // Dog barks.
+
+// 8. STATIC METHOD: Called on the class, not its instance.
+class Calculator {
+    static addNumbers(firstNumber, secondNumber) {
+        return firstNumber + secondNumber;
+    }
+}
+console.log(Calculator.addNumbers(10, 20)); // 30
+
+// 9. GETTERS AND SETTERS: Read and update properties with control.
+class User {
+    constructor(userName) {
+        this._userName = userName;
+    }
+    get userName() {
+        return this._userName;
+    }
+    set userName(newUserName) {
+        if (newUserName.trim() !== "") this._userName = newUserName;
+    }
+}
+const userObject = new User("Ibrahim");
+userObject.userName = "Ali"; // Setter.
+console.log(userObject.userName); // Getter: Ali
+
+// 10. PROTOTYPE: Objects can inherit methods through their prototype.
+console.log(Object.getPrototypeOf(polyDogObject) === Dog.prototype); // true
+
+// 11. DESTRUCTURING: Extract properties into variables.
+const { studentName, studentAge: firstStudentAge } = firstStudent;
+console.log(studentName, firstStudentAge); // Ali 15
+
+// 12. SPREAD: Copy an object's own enumerable properties.
+const copiedStudent = { ...firstStudent, studentAge: 16 };
+console.log(copiedStudent); // { studentName: "Ali", studentAge: 16 }
