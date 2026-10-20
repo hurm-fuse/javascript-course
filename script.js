@@ -1,23 +1,27 @@
-// =====================================================
+// ═══════════════════════════════════════════════════════════
 // 1. VAR, LET, CONST
-// =====================================================
+// ═══════════════════════════════════════════════════════════
 
+// var → function-scoped, can be redeclared & reassigned
 var a;
 var b = 12;
 var c = 19;
 var d = 12;
 
 d = 6;
-var d = 10;
+var d = 10; // redeclaration allowed
 
+// let → block-scoped, can be reassigned but NOT redeclared
 let age = 12;
 age = 13;
 
+// const → block-scoped, cannot be reassigned
 const dulha = "labuba";
 const dulhan = "lady";
 
 console.log(dulha + " weds " + dulhan);
 
+// let allows reassignment
 let dulhabylet = "labuba";
 let dulhanbylet = "lady";
 
@@ -25,6 +29,7 @@ dulhabylet = "harramzada";
 
 console.log(dulhabylet + " weds " + dulhanbylet);
 
+// var allows reassignment
 var dulhabyvar = "labuba";
 var dulhanbyvar = "lady";
 
@@ -32,6 +37,7 @@ dulhabyvar = "harramzada";
 
 console.log(dulhabyvar + " weds " + dulhanbyvar);
 
+// reassignment vs redeclaration
 let reassignment = 12;
 reassignment = 6;
 
@@ -40,46 +46,54 @@ var redeclaration = 20;
 
 console.log(redeclaration);
 
-// =====================================================
-// 2. SCOPE
-// =====================================================
 
+// ═══════════════════════════════════════════════════════════
+// 2. SCOPE
+// ═══════════════════════════════════════════════════════════
+
+// var → function-scoped, leaks out of blocks
 var globalVariable = 19;
 
 {
     var globalVariable = 20;
 }
 
-console.log(globalVariable);
+console.log(globalVariable); // 20
 
+// let → block-scoped, stays inside { }
 let blockVariable = 10;
 
 {
     let blockVariable = 20;
-    console.log(blockVariable);
+    console.log(blockVariable); // 20
 }
 
-console.log(blockVariable);
+console.log(blockVariable); // 10
 
-// =====================================================
+
+// ═══════════════════════════════════════════════════════════
 // 3. DATA TYPES
-// =====================================================
+// ═══════════════════════════════════════════════════════════
 
+// boolean
 let i = true;
 let j = false;
 
 console.log(i, j);
 
+// null vs undefined
 let nothing = null;
 let k;
 
-console.log(k);
+console.log(k); // undefined
 
+// symbol → always unique
 let u1 = Symbol("uid");
 let u2 = Symbol("uid");
 
-console.log(u1 === u2);
+console.log(u1 === u2); // false
 
+// symbol as object key
 let obj = {
     uid: 1,
     name: "ibrahim",
@@ -93,22 +107,25 @@ obj[no] = 8595507101;
 
 console.log(obj[no]);
 
+// arrays → reference copy
 let array = [1, 2, 3];
 let copyarray = array;
 
 copyarray.pop();
 
-console.log(array);
-console.log(copyarray);
+console.log(array);       // [1, 2]
+console.log(copyarray);   // [1, 2]
 
+// arrays → spread copy (independent)
 let originalArray = [1, 2, 3];
 let separateArray = [...originalArray];
 
 separateArray.pop();
 
-console.log(originalArray);
-console.log(separateArray);
+console.log(originalArray);   // [1, 2, 3]
+console.log(separateArray);   // [1, 2]
 
+// objects → reference copy
 let objects = {
     username: "ibrahim"
 };
@@ -117,8 +134,9 @@ let copyobjects = objects;
 
 copyobjects.username = "maaz";
 
-console.log(objects.username);
+console.log(objects.username); // maaz
 
+// dynamic typing
 let dynamictyping = 12;
 
 dynamictyping = true;
@@ -127,34 +145,45 @@ dynamictyping = [1, 2, 3];
 dynamictyping = null;
 dynamictyping = undefined;
 
+// typeof checks
 console.log(typeof a);
 console.log(typeof b);
 console.log(typeof c);
 console.log(typeof d);
-console.log(typeof NaN);
+console.log(typeof NaN); // "number"
 
-// =====================================================
+
+// ═══════════════════════════════════════════════════════════
 // 4. TYPE COERCION, TRUTHY, FALSY, NaN
-// =====================================================
+// ═══════════════════════════════════════════════════════════
 
-console.log(5 + "1");
-console.log(5 - "1");
+// + with string → concatenation
+console.log(5 + "1"); // "51"
 
-console.log(Boolean(0));
-console.log(Boolean(""));
-console.log(Boolean(null));
-console.log(Boolean(undefined));
-console.log(Boolean(NaN));
-console.log(Boolean("ibrahim"));
+// - with string → numeric coercion
+console.log(5 - "1"); // 4
 
+// falsy values
+console.log(Boolean(0));         // false
+console.log(Boolean(""));        // false
+console.log(Boolean(null));      // false
+console.log(Boolean(undefined)); // false
+console.log(Boolean(NaN));       // false
+
+// truthy value
+console.log(Boolean("ibrahim")); // true
+
+// NaN type
 let nan = NaN;
 
-console.log(typeof nan);
+console.log(typeof nan); // "number"
 
-// =====================================================
+
+// ═══════════════════════════════════════════════════════════
 // 5. OPERATORS
-// =====================================================
+// ═══════════════════════════════════════════════════════════
 
+// arithmetic
 console.log(5 + 5);
 console.log("ibrahim " + "ahmad");
 console.log(10 - 5);
@@ -163,20 +192,22 @@ console.log(10 / 5);
 console.log(13 % 5);
 console.log(5 ** 5);
 
-console.log(12 == "12");
-console.log(12 === "12");
+// comparison → == (loose) vs === (strict)
+console.log(12 == "12");   // true
+console.log(12 === "12");  // false
 
-console.log(12 != 13);
-console.log(12 != "12");
+console.log(12 != 13);     // true
+console.log(12 != "12");   // false
 
-console.log(12 !== 13);
-console.log(12 !== "12");
+console.log(12 !== 13);    // true
+console.log(12 !== "12");  // true
 
 console.log(15 > 13);
 console.log(15 < 13);
 console.log(15 <= 15);
 console.log(15 >= 15);
 
+// assignment operators
 let equal2 = 10;
 
 equal2 += 3;
@@ -194,6 +225,7 @@ console.log(equal2);
 equal2 %= 5;
 console.log(equal2);
 
+// logical operators
 console.log(true && true);
 console.log(false && true);
 
@@ -201,9 +233,10 @@ console.log(true || true);
 console.log(false || true);
 
 console.log(!true);
-console.log(!!12);
-console.log(!!0);
+console.log(!!12);  // true
+console.log(!!0);   // false
 
+// unary operators
 let Unarya = 10;
 let Unaryb = -5;
 let Unaryc = true;
@@ -218,50 +251,51 @@ console.log(typeof Unarya);
 console.log(typeof Unaryd);
 console.log(typeof Unaryc);
 console.log(typeof undefined);
-console.log(typeof null);
+console.log(typeof null);   // "object" (famous bug)
 console.log(typeof {});
 
+// pre vs post increment
 let Unaryx = 5;
-
-console.log(++Unaryx);
+console.log(++Unaryx); // 6
 
 let Unaryy = 5;
-
-console.log(Unaryy++);
-console.log(Unaryy);
+console.log(Unaryy++); // 5
+console.log(Unaryy);   // 6
 
 let Unaryp = 5;
-
-console.log(--Unaryp);
+console.log(--Unaryp); // 4
 
 let Unaryq = 5;
+console.log(Unaryq--); // 5
+console.log(Unaryq);   // 4
 
-console.log(Unaryq--);
-console.log(Unaryq);
-
+// ternary
 console.log(12 > 13 ? "true" : "false");
 
+// instanceof
 let arr = [1, 2, 3];
 
-console.log(arr instanceof Array);
-console.log(arr instanceof Object);
+console.log(arr instanceof Array);   // true
+console.log(arr instanceof Object);  // true
 
 let objj = {
     name: "Ibrahim"
 };
 
-console.log(objj instanceof Object);
-console.log(objj instanceof Array);
+console.log(objj instanceof Object); // true
+console.log(objj instanceof Array);  // false
 
 let date = new Date();
 
-console.log(date instanceof Date);
-console.log(date instanceof Object);
+console.log(date instanceof Date);   // true
+console.log(date instanceof Object); // true
 
-// =====================================================
+
+// ═══════════════════════════════════════════════════════════
 // 6. CONDITIONS, SWITCH, LOOPS
-// =====================================================
+// ═══════════════════════════════════════════════════════════
 
+// nested ternary
 let score = 78;
 
 let grade = score >= 90
@@ -274,6 +308,7 @@ let grade = score >= 90
 
 console.log(grade);
 
+// if-else
 let loggedin = true;
 let admin = true;
 
@@ -285,6 +320,7 @@ if (!loggedin) {
     console.log("You are normal user");
 }
 
+// switch
 let day = 3;
 
 switch (day) {
@@ -308,6 +344,7 @@ switch (day) {
         console.log("Invalid day");
 }
 
+// function with if-return
 function checkAge(age) {
     if (age < 18) {
         return "You cannot vote";
@@ -332,10 +369,12 @@ function getgrade(score) {
 
 console.log(getgrade(90));
 
+// for loop
 for (let loopI = 1; loopI <= 10; loopI++) {
     console.log(loopI);
 }
 
+// while loop
 let start = 1;
 
 while (start < 33) {
@@ -343,6 +382,7 @@ while (start < 33) {
     start++;
 }
 
+// do-while loop
 let dowhilestart = 1;
 
 do {
@@ -350,6 +390,7 @@ do {
     dowhilestart++;
 } while (dowhilestart < 20);
 
+// break
 for (let loopJ = 1; loopJ <= 20; loopJ++) {
     if (loopJ === 19) {
         console.log("19 is lucky number");
@@ -359,6 +400,7 @@ for (let loopJ = 1; loopJ <= 20; loopJ++) {
     console.log(loopJ);
 }
 
+// continue
 for (let loopK = 1; loopK <= 20; loopK++) {
     if (loopK === 19) {
         continue;
@@ -367,10 +409,12 @@ for (let loopK = 1; loopK <= 20; loopK++) {
     console.log(loopK);
 }
 
-// =====================================================
-// 7. FUNCTIONS
-// =====================================================
 
+// ═══════════════════════════════════════════════════════════
+// 7. FUNCTIONS
+// ═══════════════════════════════════════════════════════════
+
+// basic function
 function sayHello() {
     console.log("Hello Ibrahim");
 }
@@ -378,6 +422,7 @@ function sayHello() {
 sayHello();
 sayHello();
 
+// function with parameter
 function greet(name) {
     console.log("Hello " + name);
 }
@@ -386,6 +431,7 @@ greet("Ibrahim");
 greet("Ali");
 greet("Maaz");
 
+// console inside function
 function add(a, b) {
     console.log(a + b);
 }
@@ -393,6 +439,7 @@ function add(a, b) {
 add(10, 20);
 add(5, 7);
 
+// return value
 function sum(a, b) {
     return a + b;
 }
@@ -401,6 +448,7 @@ let result = sum(10, 20);
 
 console.log(result);
 
+// code after return never runs
 function test() {
     return 10;
     console.log("Hello");
@@ -408,6 +456,7 @@ function test() {
 
 console.log(test());
 
+// console vs return
 function firstFunction() {
     console.log(10 + 20);
 }
@@ -422,6 +471,7 @@ let answer = secondFunction();
 
 console.log(answer);
 
+// multi-condition function
 function checkNumber(num) {
     if (num < 0) {
         return "Negative number";
@@ -438,22 +488,26 @@ console.log(checkNumber(-5));
 console.log(checkNumber(0));
 console.log(checkNumber(8));
 
+// function expression
 const multiply = function (a, b) {
     return a * b;
 };
 
 console.log(multiply(4, 5));
 
+// arrow function (block body)
 const subtract = (a, b) => {
     return a - b;
 };
 
 console.log(subtract(10, 4));
 
+// arrow function (one-liner)
 const square = num => num * num;
 
 console.log(square(5));
 
+// default parameter
 function welcome(name = "Guest") {
     console.log("Welcome " + name);
 }
@@ -461,6 +515,7 @@ function welcome(name = "Guest") {
 welcome("Ibrahim");
 welcome();
 
+// loop inside function
 function printNumbers(numbers) {
     for (let index = 0; index < numbers.length; index++) {
         console.log(numbers[index]);
@@ -469,6 +524,7 @@ function printNumbers(numbers) {
 
 printNumbers([10, 20, 30]);
 
+// object as parameter
 function showUser(user) {
     console.log(user.name);
     console.log(user.age);
@@ -479,6 +535,7 @@ showUser({
     age: 14
 });
 
+// rest parameter
 function addAll(...numbers) {
     let total = 0;
 
@@ -492,6 +549,7 @@ function addAll(...numbers) {
 console.log(addAll(1, 2, 3));
 console.log(addAll(10, 20, 30, 40));
 
+// callback
 function processUser(name, callback) {
     callback(name);
 }
@@ -502,6 +560,7 @@ function sayWelcome(name) {
 
 processUser("Ibrahim", sayWelcome);
 
+// nested function
 function outer() {
     console.log("Outer function");
 
@@ -514,6 +573,7 @@ function outer() {
 
 outer();
 
+// recursion
 function countdown(n) {
     if (n === 0) {
         console.log("Done!");
@@ -526,10 +586,12 @@ function countdown(n) {
 
 countdown(3);
 
-// =====================================================
-// 8. ARRAYS
-// =====================================================
 
+// ═══════════════════════════════════════════════════════════
+// 8. ARRAYS
+// ═══════════════════════════════════════════════════════════
+
+// create & access
 let fruits = ["Apple", "Banana", "Mango"];
 
 console.log(fruits);
@@ -540,20 +602,24 @@ console.log(fruits[2]);
 console.log(fruits.length);
 console.log(fruits[fruits.length - 1]);
 
+// modify by index
 fruits[1] = "Orange";
 
+// push / pop → end
 fruits.push("Grapes");
 console.log(fruits);
 
 fruits.pop();
 console.log(fruits);
 
+// unshift / shift → start
 fruits.unshift("Pineapple");
 console.log(fruits);
 
 fruits.shift();
 console.log(fruits);
 
+// indexOf / includes
 let numbers = [10, 20, 30, 40];
 
 console.log(numbers.indexOf(30));
@@ -562,6 +628,7 @@ console.log(numbers.indexOf(50));
 console.log(numbers.includes(20));
 console.log(numbers.includes(99));
 
+// slice → non-mutating
 let nums = [10, 20, 30, 40, 50];
 
 let selected = nums.slice(1, 4);
@@ -569,24 +636,28 @@ let selected = nums.slice(1, 4);
 console.log(selected);
 console.log(nums);
 
+// splice → mutating
 let values = [10, 20, 30, 40];
 
 values.splice(1, 2);
 
 console.log(values);
 
+// for loop
 let marks = [80, 90, 75, 95];
 
 for (let index = 0; index < marks.length; index++) {
     console.log(marks[index]);
 }
 
+// for...of
 let names = ["Ibrahim", "Ali", "Maaz"];
 
 for (let name of names) {
     console.log(name);
 }
 
+// forEach
 let scores = [10, 20, 30];
 
 scores.forEach(function (score) {
@@ -595,6 +666,7 @@ scores.forEach(function (score) {
 
 scores.forEach(score => console.log(score));
 
+// map
 let oldNumbers = [1, 2, 3, 4];
 
 let doubled = oldNumbers.map(function (num) {
@@ -604,6 +676,7 @@ let doubled = oldNumbers.map(function (num) {
 console.log(doubled);
 console.log(oldNumbers);
 
+// filter
 let ages = [12, 18, 25, 15, 30];
 
 let adults = ages.filter(function (age) {
@@ -612,12 +685,14 @@ let adults = ages.filter(function (age) {
 
 console.log(adults);
 
+// find
 let findNumbers = [5, 12, 18, 25];
 
 let found = findNumbers.find(num => num > 15);
 
 console.log(found);
 
+// reduce
 let prices = [100, 200, 300];
 
 let totalPrice = prices.reduce(function (sum, price) {
@@ -626,6 +701,7 @@ let totalPrice = prices.reduce(function (sum, price) {
 
 console.log(totalPrice);
 
+// spread copy
 let original = [1, 2, 3];
 let copied = [...original];
 
@@ -634,6 +710,7 @@ copied.push(4);
 console.log(original);
 console.log(copied);
 
+// merge arrays
 let firstArray = [1, 2];
 let secondArray = [3, 4];
 
@@ -641,6 +718,7 @@ let mergedArray = [...firstArray, ...secondArray];
 
 console.log(mergedArray);
 
+// array destructuring
 let colors = ["Red", "Green", "Blue"];
 
 let [firstColor, secondColor, thirdColor] = colors;
@@ -649,6 +727,7 @@ console.log(firstColor);
 console.log(secondColor);
 console.log(thirdColor);
 
+// 2D array
 let matrix = [
     [1, 2],
     [3, 4]
@@ -659,10 +738,12 @@ console.log(matrix[0][1]);
 console.log(matrix[1][0]);
 console.log(matrix[1][1]);
 
-// =====================================================
-// 9. OBJECTS
-// =====================================================
 
+// ═══════════════════════════════════════════════════════════
+// 9. OBJECTS
+// ═══════════════════════════════════════════════════════════
+
+// create object
 let student = {
     name: "Ibrahim",
     age: 14,
@@ -672,33 +753,40 @@ let student = {
 
 console.log(student);
 
+// dot access
 console.log(student.name);
 console.log(student.age);
 console.log(student.class);
 
+// bracket access
 console.log(student["name"]);
 console.log(student["age"]);
 console.log(student["class"]);
 
+// dynamic key access
 let propertyName = "name";
 
 console.log(student[propertyName]);
 
+// add properties
 student.city = "Delhi";
 student.favoriteLanguage = "JavaScript";
 student["favoriteColor"] = "Black";
 
 console.log(student.favoriteColor);
 
+// update property
 student.age = 15;
 
 console.log(student.age);
 
+// delete property
 delete student.favoriteColor;
 
 console.log(student.favoriteColor);
 console.log(student);
 
+// nested object + method
 let profile = {
     username: "ibrahim",
     age: 14,
@@ -722,6 +810,7 @@ console.log(profile.address.city);
 
 profile.sayHello();
 
+// method with `this`
 let person = {
     name: "Ibrahim",
     age: 14,
@@ -734,6 +823,7 @@ let person = {
 
 person.introduce();
 
+// shorthand method
 let anotherPerson = {
     name: "Ali",
 
@@ -744,6 +834,7 @@ let anotherPerson = {
 
 anotherPerson.introduce();
 
+// calculator object
 let calculator = {
     add(a, b) {
         return a + b;
@@ -772,6 +863,7 @@ console.log(calculator.multiply(10, 5));
 console.log(calculator.divide(10, 5));
 console.log(calculator.divide(10, 0));
 
+// `in` vs hasOwnProperty
 let car = {
     brand: "Toyota",
     model: "Fortuner",
@@ -784,11 +876,13 @@ console.log("color" in car);
 console.log(car.hasOwnProperty("model"));
 console.log(car.hasOwnProperty("color"));
 
+// property set to undefined still exists
 car.color = undefined;
 
 console.log("color" in car);
 console.log(car.color);
 
+// Object.keys / values / entries
 let phone = {
     brand: "Apple",
     model: "iPhone",
@@ -799,6 +893,7 @@ console.log(Object.keys(phone));
 console.log(Object.values(phone));
 console.log(Object.entries(phone));
 
+// for...in
 let laptop = {
     brand: "Apple",
     model: "MacBook Air",
@@ -811,10 +906,12 @@ for (let key in laptop) {
     console.log(laptop[key]);
 }
 
+// entries destructuring
 for (let [key, value] of Object.entries(laptop)) {
     console.log(key + ": " + value);
 }
 
+// nested object
 let user = {
     name: "Ibrahim",
 
@@ -828,6 +925,7 @@ let user = {
 console.log(user.address.city);
 console.log(user.address.country);
 
+// array inside object
 let developer = {
     name: "Ibrahim",
     skills: ["HTML", "CSS", "JavaScript", "C"]
@@ -841,6 +939,7 @@ developer.skills.push("C++");
 
 console.log(developer.skills);
 
+// spread copy (shallow)
 let originalObj = {
     name: "Ibrahim",
     age: 14
@@ -853,6 +952,7 @@ copyObj.name = "Ali";
 console.log(originalObj.name);
 console.log(copyObj.name);
 
+// Object.assign merge
 let first = {
     name: "Ibrahim"
 };
@@ -866,6 +966,7 @@ Object.assign(first, second);
 
 console.log(first);
 
+// object destructuring
 let studentInfo = {
     name: "Ibrahim",
     age: 14,
@@ -882,6 +983,7 @@ console.log(name);
 console.log(studentAge);
 console.log(studentClass);
 
+// spread merge objects
 let personal = {
     name: "Ibrahim",
     age: 14
@@ -899,6 +1001,7 @@ let completeProfile = {
 
 console.log(completeProfile);
 
+// Object.freeze → cannot modify
 let settings = {
     theme: "dark",
     language: "English"
@@ -908,8 +1011,9 @@ Object.freeze(settings);
 
 settings.theme = "light";
 
-console.log(settings.theme);
+console.log(settings.theme); // dark
 
+// Object.seal → modify allowed, add/delete not
 let account = {
     username: "ibrahim",
     active: true
@@ -923,6 +1027,7 @@ delete account.username;
 
 console.log(account);
 
+// reference copy
 let objectA = {
     score: 100
 };
@@ -931,15 +1036,17 @@ let objectB = objectA;
 
 objectB.score = 200;
 
-console.log(objectA.score);
-console.log(objectB.score);
+console.log(objectA.score); // 200
+console.log(objectB.score); // 200
 
+// optional chaining
 let customer = {
     name: "Ibrahim"
 };
 
-console.log(customer.address?.city);
+console.log(customer.address?.city); // undefined, no error
 
+// method using `this`
 let product = {
     id: 101,
     name: "MacBook Air",
@@ -962,65 +1069,50 @@ product.displayDetails();
 
 console.log(product.discountPrice(10));
 
-// =====================================================
+
+// ═══════════════════════════════════════════════════════════
 // 10. DOM MANIPULATION
-// =====================================================
+// ═══════════════════════════════════════════════════════════
 
-// HTML se element select karna
+// ── SELECTING ELEMENTS ─────────────────────────────────────
 
-// selected by id
 let selectedbyid = document.getElementById("abcd");
-
 console.dir(selectedbyid);
 
-// selected by class name
 let selectedbyclassname = document.getElementsByClassName("text");
-
 console.dir(selectedbyclassname);
 console.log(selectedbyclassname[0]);
 
-// selected by tag name
 let selectedbytagname = document.getElementsByTagName("p");
-
 console.dir(selectedbytagname);
 
-// selected by query selector
 let selectedbyquery = document.querySelector("h1");
-
 console.dir(selectedbyquery);
 
-// selected by query all selector
 let selectedbyqueryall = document.querySelectorAll("h1");
-
 console.dir(selectedbyqueryall);
 
-// CSS selector se element select karna
+// CSS selector selectors
 console.log(document.querySelector("#abcd"));
 console.log(document.querySelector(".text"));
 console.log(document.querySelector("#mybox .text"));
 
-// =====================================================
-// TEXT CHANGE KARNA
-// =====================================================
+
+// ── CHANGING TEXT ──────────────────────────────────────────
 
 let h1 = document.getElementById("abcd");
 
 h1.textContent = "hello ibrahim kaise hu";
 
-// innerHTML HTML tags ko bhi read karta hai
 let text = document.getElementById("text");
 
 text.innerHTML = "<i>i am italian</i>";
 
-// innerText visible text deta hai
 console.log(h1.innerText);
-
-// textContent text ko read ya change karta hai
 console.log(h1.textContent);
 
-// =====================================================
-// STYLE CHANGE KARNA
-// =====================================================
+
+// ── CHANGING STYLES ────────────────────────────────────────
 
 h1.style.color = "yellow";
 h1.style.backgroundColor = "black";
@@ -1029,9 +1121,8 @@ h1.style.borderRadius = "8px";
 
 text.style.fontSize = "20px";
 
-// =====================================================
-// ATTRIBUTE CHANGE KARNA
-// =====================================================
+
+// ── CHANGING ATTRIBUTES ────────────────────────────────────
 
 let atag = document.querySelector("a");
 
@@ -1047,14 +1138,12 @@ console.log(atag.getAttribute("href"));
 let a2tag = document.getElementById("a2tag");
 
 a2tag.setAttribute("href", "https://www.youtube.com");
-
 a2tag.setAttribute("target", "_blank");
 
 console.log(a2tag.getAttribute("href"));
 
-// =====================================================
-// IMAGE KA SRC CHANGE KARNA
-// =====================================================
+
+// ── CHANGING IMAGE SRC ─────────────────────────────────────
 
 let img = document.querySelector("img");
 
@@ -1065,266 +1154,221 @@ img.setAttribute(
 
 img.setAttribute("alt", "New image");
 
-// =====================================================
-// CLASSLIST
-// =====================================================
+
+// ── CLASSLIST ──────────────────────────────────────────────
 
 let mybox = document.getElementById("mybox");
 
-// class add karna
 mybox.classList.add("highlight");
-
-// class check karna
 console.log(mybox.classList.contains("highlight"));
-
-// class remove karna
 mybox.classList.remove("highlight");
-
-// class toggle karna
 mybox.classList.toggle("highlight");
 
-// =====================================================
-// ELEMENT CREATE KARNA
-// =====================================================
+
+// ── CREATING ELEMENTS ──────────────────────────────────────
 
 let newParagraph = document.createElement("p");
 
 newParagraph.textContent = "i am a new paragraph";
-
 newParagraph.classList.add("text");
 
 document.getElementById("newbox").append(newParagraph);
 
-// append() element ko end mein add karta hai
-
+// append → end
 let secondParagraph = document.createElement("p");
-
 secondParagraph.textContent = "i am added at the end";
-
 document.getElementById("newbox").append(secondParagraph);
 
-// prepend() element ko start mein add karta hai
-
+// prepend → start
 let firstParagraph = document.createElement("p");
-
 firstParagraph.textContent = "i am added at the beginning";
-
 document.getElementById("newbox").prepend(firstParagraph);
 
-// =====================================================
-// ELEMENT BEFORE AND AFTER
-// =====================================================
+
+// ── INSERTING BEFORE / AFTER ───────────────────────────────
 
 let beforeElement = document.createElement("p");
-
 beforeElement.textContent = "i am before the box";
-
 document.getElementById("newbox").before(beforeElement);
 
 let afterElement = document.createElement("p");
-
 afterElement.textContent = "i am after the box";
-
 document.getElementById("newbox").after(afterElement);
 
-// =====================================================
-// ELEMENT REMOVE KARNA
-// =====================================================
 
-// element ko remove karna
+// ── REMOVING ELEMENTS ──────────────────────────────────────
+
 // afterElement.remove();
-
-// parent se child remove karna
 // document.getElementById("newbox").removeChild(firstParagraph);
 
-// =====================================================
-// HIDE AND SHOW
-// =====================================================
 
-// image hide karna
+// ── HIDE / SHOW ────────────────────────────────────────────
+
 // img.hidden = true;
-
-// image show karna
 // img.hidden = false;
-
-// display none se hide karna
 // img.style.display = "none";
-
-// display block se show karna
 // img.style.display = "block";
 
-// =====================================================
-// HTML CONTENT REPLACE KARNA
-// =====================================================
 
-// innerHTML HTML ko bhi render karta hai
+// ── REPLACING CONTENT ──────────────────────────────────────
+
 // document.getElementById("newbox").innerHTML = "<h2>hello</h2>";
-
-// textContent sirf text ko render karta hai
 // document.getElementById("newbox").textContent = "hello";
 
-// =====================================================
-// CHILDREN SELECT KARNA
-// =====================================================
+
+// ── CHILDREN & NODE INFO ───────────────────────────────────
 
 let parent = document.getElementById("newbox");
 
 console.log(parent.children);
-
 console.log(parent.firstElementChild);
-
 console.log(parent.lastElementChild);
-
 console.log(parent.parentElement);
 
-// =====================================================
-// NODE AND ELEMENT INFORMATION
-// =====================================================
-
 console.log(h1.tagName);
-
 console.log(h1.id);
-
 console.log(h1.className);
-
 console.log(h1.textContent);
-
-// =====================================================
-// END
-// =====================================================
 
 console.log("DOM manipulation complete!");
 
-// event means some action happen
-// event listener means you give reaction to action
-// for one click
+
+// ═══════════════════════════════════════════════════════════
+// 11. EVENTS
+// ═══════════════════════════════════════════════════════════
+
+// event = some action happens
+// event listener = your reaction to that action
+
+// ── BASIC EVENTS ───────────────────────────────────────────
+
+// click
 let eventh1 = document.getElementById("event-h1");
 eventh1.addEventListener("click", function () {
-    eventh1.style.color = "#111 "
-})
-// for double click 
+    eventh1.style.color = "#111 ";
+});
+
+// double click
 let eventp = document.getElementById("event-p");
 function eventpfunc() {
-    eventp.style.color = "yellow"
+    eventp.style.color = "yellow";
 }
-eventp.addEventListener("dblclick", eventpfunc)
-// REMOVE EVENT LISTENER
+eventp.addEventListener("dblclick", eventpfunc);
+
+// remove event listener
 let removeBtn = document.getElementById("removeBtn");
 removeBtn.addEventListener("click", function () {
     eventp.removeEventListener("dblclick", eventpfunc);
     console.log("Double-click listener remove ho gaya!");
 });
-// all events type
-// click
+
+// click on p
 let eventp2 = document.getElementById("eventp2");
 eventp2.addEventListener("click", function () {
     eventp2.style.color = "red";
 });
-// input
+
+// input event → typed data
 let eventinput = document.getElementById("eventinput");
 eventinput.addEventListener("input", function (output) {
     console.log("typed");
-    // if you wanted to know what user typed
     if (output.data !== null) {
         console.log(output.data);
     }
-})
-// change event tab chalta hai jab aapka koi input select ya textarea mai change hojaye
+});
+
+// change event → on input/select/textarea change
 let select = document.querySelector("select");
-let device = document.getElementById("device")
+let device = document.getElementById("device");
 select.addEventListener("change", function (details) {
     console.log(details.target.value);
-    device.textContent = `${details.target.value} device selected`
-})
-// keydown shows what key you press on fucking keyboard
-let keyboxh1 = document.getElementById("key-h1")
+    device.textContent = `${details.target.value} device selected`;
+});
+
+// keydown → keyboard key
+let keyboxh1 = document.getElementById("key-h1");
 window.addEventListener("keydown", function (details) {
     keyboxh1.textContent = details.key;
-})
-// event listern for img
+});
+
+// file input
 let btn = document.querySelector("#btn");
 let file = document.querySelector("#file");
 let previewimage = document.querySelector("#preview-image");
+
 btn.addEventListener("click", function () {
     file.click();
-})
+});
+
 file.addEventListener("change", function (details) {
     console.log(details.target.files[0].name);
     btn.textContent = `${details.target.files[0].name}`;
-})
-// change complete
+});
 
-// submit
-// STEP 1: Form ko select kiya
+
+// ── SUBMIT EVENT (FORM → CARD) ─────────────────────────────
+
 let main = document.querySelector("#second-box");
 let form = document.querySelector("#second-form");
-// STEP 2: Form ke saare inputs select kiye
 let inputs = document.querySelectorAll("#second-form input");
-// STEP 3: Submit event listener lagaya
+
 form.addEventListener("submit", function (details) {
-    // Page reload hone se rokna
     details.preventDefault();
-    // Tere inputs ka current order:
-    // inputs[0] = profile pic
-    // inputs[1] = name
-    // inputs[2] = email
-    // inputs[3] = age
+
+    // inputs[0] = profile pic, inputs[1] = name
+    // inputs[2] = email, inputs[3] = age
     console.log(
         inputs[0].value,
         inputs[1].value,
         inputs[2].value,
         inputs[3].value
     );
-    // STEP 4: Card ka parent element create kiya
+
     let card = document.createElement("div");
-    // Card ko CSS class di
-    card.classList.add("card")
-    // STEP 5: Profile container create kiya
+    card.classList.add("card");
+
     let profile = document.createElement("div");
     profile.classList.add("profile");
-    // STEP 6: Image element create kiya
+
     let img = document.createElement("img");
-    // Input 0 se image ka URL set kiya
     img.setAttribute("src", inputs[0].value);
-    // Image load na ho toh alternative text
     img.setAttribute("alt", "Profile picture");
-    // STEP 7: Name element create kiya
+
     let name = document.createElement("h2");
-    // Input 1 se name set kiya
     name.textContent = inputs[1].value;
-    // STEP 8: Email element create kiya
+
     let email = document.createElement("h2");
-    // Input 2 se email set kiya
     email.textContent = inputs[2].value;
-    // STEP 9: Age element create kiya
+
     let age = document.createElement("h2");
-    // IMPORTANT: Age inputs[3] mein hai
     age.textContent = inputs[3].value;
-    // STEP 10: Saare elements profile ke andar add kiye
+
     profile.appendChild(img);
     profile.appendChild(name);
     profile.appendChild(email);
     profile.appendChild(age);
-    // STEP 11: Profile ko card ke andar add kiya
+
     card.appendChild(profile);
-    // STEP 12: Card ko actual HTML page par add kiya
-    // form.parentElement woh #second-box hai
-    // jiske andar form already present hai.
     main.appendChild(card);
-    // STEP 13: Form ko empty kar diya
+
     form.reset();
 });
 
-// mouseover and mouseout
+
+// ── MOUSE EVENTS ───────────────────────────────────────────
+
+// mouseover / mouseout
 let abcd2 = document.querySelector("#abcd-2");
+
 abcd2.addEventListener("mouseover", function () {
     abcd2.style.backgroundColor = "yellow";
-})
+});
+
 abcd2.addEventListener("mouseout", function () {
     abcd2.style.backgroundColor = "#000";
-})
+});
 
-// mousemove
+// mousemove → cursor coordinates
 window.addEventListener("mousemove", function (details) {
     console.log(details.clientX, details.clientY);
 
@@ -1332,51 +1376,51 @@ window.addEventListener("mousemove", function (details) {
     abcd2.style.left = details.clientX + "px";
 });
 
-// event object
+
+// ── EVENT OBJECT ───────────────────────────────────────────
+
 let evtobjbtn = document.querySelector("#btn");
-// event listener
+
 evtobjbtn.addEventListener("click", function (event) {
-    // event object
-    console.log(event);
-    // event.type tells which event happened
-    console.log(event.type);
-    // event.target tells which element triggered the event
-    console.log(event.target);
-    // event.target.textContent tells the text of that element
-    console.log(event.target.textContent);
-    // event.clientX tells the mouse position on the screen horizontally
-    console.log(event.clientX);
-    // event.clientY tells the mouse position on the screen vertically
-    console.log(event.clientY);
+    console.log(event);                    // full event object
+    console.log(event.type);               // "click"
+    console.log(event.target);             // element that triggered
+    console.log(event.target.textContent); // its text
+    console.log(event.clientX);            // cursor x
+    console.log(event.clientY);            // cursor y
 });
 
-// event bubbling
+
+// ── EVENT BUBBLING ─────────────────────────────────────────
+
 let ul = document.querySelector("ul");
+
 ul.addEventListener("click", function (details) {
     details.target.classList.toggle("ul");
-})
+});
 
-// event capturing
+
+// ── EVENT CAPTURING ────────────────────────────────────────
+
 let grandparent = document.querySelector("#grandparent");
 let onlyparent = document.querySelector("#parent");
 let child = document.querySelector("#child");
 
-// grandparent ka capturing listener
 grandparent.addEventListener("click", function (details) {
     console.log("Grandparent clicked");
 }, true);
 
-// parent ka capturing listener
 onlyparent.addEventListener("click", function (details) {
     console.log("Parent clicked");
 }, true);
 
-// child ka capturing listener
 child.addEventListener("click", function (details) {
     console.log("Child clicked");
 }, true);
 
-// form and form validation
+
+// ── FORM VALIDATION ────────────────────────────────────────
+
 let formvalidation = document.getElementById("form-validation");
 let nameInput = document.getElementById("name");
 let emailInput = document.getElementById("email");
@@ -1384,38 +1428,38 @@ let passwordInput = document.getElementById("password");
 let genderInput = document.getElementById("gender");
 let aboutInput = document.getElementById("about");
 let message = document.getElementById("message");
+
 formvalidation.addEventListener("submit", function (event) {
-    // Page ko reload hone se rokta hai
     event.preventDefault();
-    // Input ki values nikalna
+
     let name = nameInput.value.trim();
     let email = emailInput.value.trim();
     let password = passwordInput.value;
     let gender = genderInput.value;
     let about = aboutInput.value.trim();
-    // Name validation
+
     if (name === "") {
         message.textContent = "Please enter your name";
         return;
     }
-    // Email validation
+
     if (email === "") {
         message.textContent = "Please enter your email";
         return;
     }
-    // Password validation
+
     if (password.length < 8) {
         message.textContent = "Password must be at least 8 characters";
         return;
     }
-    // About yourself validation
+
     if (about === "") {
         message.textContent = "Please tell us about yourself";
         return;
     }
-    // Agar saari validations pass ho gayi
+
     message.textContent = "Form submitted successfully!";
-    // Submitted data console mein dekhna
+
     console.log("Name:", name);
     console.log("Email:", email);
     console.log("Password:", password);
@@ -1424,104 +1468,123 @@ formvalidation.addEventListener("submit", function (event) {
 });
 
 
-// timers and intervals
-// setTimeout ek baar callback chalata hai delay ke baad
+// ═══════════════════════════════════════════════════════════
+// 12. TIMERS & INTERVALS
+// ═══════════════════════════════════════════════════════════
+
+// ── setTimeout (runs once) ─────────────────────────────────
+
 let timeoutText = document.getElementById("timeout-text");
 let timeoutBtn = document.getElementById("timeout-btn");
 let clearTimeoutBtn = document.getElementById("clear-timeout-btn");
 let timer;
+
 timeoutBtn.addEventListener("click", function () {
-    // Purana timeout pending ho toh use cancel karo
     clearTimeout(timer);
     timeoutText.textContent = "Please wait...";
-    // 3000 milliseconds = 3 seconds
+
     timer = setTimeout(function () {
         timeoutText.textContent = "Hello bhai, 3 seconds ho gaye!";
     }, 3000);
 });
+
 clearTimeoutBtn.addEventListener("click", function () {
-    // Pending timeout ko cancel karta hai
     clearTimeout(timer);
     timeoutText.textContent = "Timeout cancelled!";
 });
-// setInterval callback ko baar-baar chalata hai
+
+
+// ── setInterval (runs repeatedly) ──────────────────────────
+
 let count = 0;
 let countText = document.getElementById("interval-count");
 let startIntervalBtn = document.getElementById("start-interval-btn");
 let stopIntervalBtn = document.getElementById("stop-interval-btn");
 let interval;
+
 startIntervalBtn.addEventListener("click", function () {
-    // Duplicate intervals banne se rokta hai
     if (interval !== undefined) {
         return;
     }
+
     interval = setInterval(function () {
         count++;
         countText.textContent = "Count: " + count;
     }, 1000);
 });
+
 stopIntervalBtn.addEventListener("click", function () {
-    // Interval ko stop karta hai
     clearInterval(interval);
     interval = undefined;
 });
-// simple clock using setInterval
+
+
+// ── simple clock ───────────────────────────────────────────
+
 let clock = document.getElementById("clock");
 let seconds = 0;
+
 setInterval(function () {
     seconds++;
     clock.textContent = "Clock: " + seconds + " seconds";
 }, 1000);
 
-// local storage -> aapke browser ke andar data store krne jo ki browser band hone par bhi delete nhi hoga
-// session storage -> ye aapka data temporarilry store krta hai mtlb ki tab band hua aur data gaya
-// cookies -> ye bhi data store krta hai and aapka data browser ke cookies naam ki property mai save hota hai and ye cookie concept kam data ya light data ke liye hota hai
-// local storage
-// store kaise krte hai
+
+// ═══════════════════════════════════════════════════════════
+// 13. STORAGE
+// ═══════════════════════════════════════════════════════════
+
+// localStorage → persists after browser close
+// sessionStorage → cleared when tab closes
+// cookies → tiny data (~4kb), auto-sent to server on reload
+
+// ── localStorage ───────────────────────────────────────────
+
 localStorage.setItem("name", "ibrahim");
-// data fetch kaise krte hai 
 localStorage.getItem("name");
-// remove kaise krte hai
 localStorage.removeItem("name");
-// update kaise krte hai
 localStorage.setItem("name", "maaz");
-// store array in local storage
+
+// store array in localStorage
 localStorage.setItem("friends", JSON.stringify(["ibrahim", "maaz", "taklu"]));
 let friends = JSON.parse(localStorage.getItem("friends"));
 console.log(friends);
-// session storage
-// store kaise krte hai
+
+
+// ── sessionStorage ─────────────────────────────────────────
+
 sessionStorage.setItem("name", "ibrahim");
-// data fetch kaise krte hai 
 sessionStorage.getItem("name");
-// remove kaise krte hai
 sessionStorage.removeItem("name");
-// update kaise krte hai
 sessionStorage.setItem("name", "maaz");
-// the differnce between session storage and local storage is when you relod the tab the session storage goes away but local storage not.
-// cookies
-// browser mein tiny data store krne ke liye cookies ka istemaal hota hai
-// cookies ~4kb
-// local storage session storage~5mb
-// cookies mein jo bhi data store kroge wo data page reload krne pai automaiticly server par jayega
-// store kaise krte hai
+
+
+// ── cookies ────────────────────────────────────────────────
+
 document.cookie = "email=ibu@gmail.com";
 document.cookie = "age=14";
 
-// scope - functional, global, block scope
-// functional scope - function ke andar hi use ho sakti hai
-// global scope - poore code mein kahi bhi use ho sakta hai 
-// block scope - {} curly braces mai hi use ho sakti hai
+
+// ═══════════════════════════════════════════════════════════
+// 14. SCOPE, EXECUTION CONTEXT, CLOSURES
+// ═══════════════════════════════════════════════════════════
+
+// ── scope types ────────────────────────────────────────────
+
 let scopea = 10; // global scope
+
 function scopeb() {
     let scopeb = 20; // functional scope
 }
+
 {
     let scopec = 30; // block scope
 }
 
-// executation content
-// js sabse pahle jaise hi aapka function dekhta hai sabse pahle js bnata hai executation context , ya ek process hai jo do differnce phases mai chalta hai, memory phase and dossre ka naam hai executation phase
+
+// ── execution context ──────────────────────────────────────
+// JS runs in 2 phases: memory phase + execution phase
+
 function execution() {
     var executationa = 12;
     var executationb = 13;
@@ -1529,103 +1592,123 @@ function execution() {
 }
 execution();
 
-// lexical scoping(js) -> ki aap kaha par phiscally available ho ye poori tareeke se depend krta hai ki aap kya access kro
+
+// ── lexical scoping ────────────────────────────────────────
+// access depends on where you are physically written
+
 function lexical() {
     let a = 12;
+
     function defg() {
         console.log(a);
     }
+
     return defg;
 }
 lexical();
 
-// dyanmic scoping -> kha se call kr rhe ho uspe depend krega ki kya value milegi (not follow in js)
+
+// ── dynamic scoping (NOT used in JS) ───────────────────────
+// access depends on who called you
+
 let india = "ghazwa e hind";
+
 function dyanmic() {
     let india = "bharat";
     dyanmicchild();
 }
+
 function dyanmicchild() {
     console.log(india);
 }
 dyanmic();
 
-// closures hote hai functions jo ki kisi parent function ke andar ho aur andar wala function return ho rha ho and returning function use kre parent function ka koi variable use kre
+
+// ── closures ───────────────────────────────────────────────
+// inner function returns and still remembers outer variable
+
 function closures() {
     let closuresa = 12;
+
     function child(params) {
         console.log(closuresa);
     }
+
     return child;
 }
 closures();
 
-// 1. GLOBAL SCOPE
-console.log(this); // Browser ke normal script mein: window
 
-// 2. NORMAL FUNCTION
+// ═══════════════════════════════════════════════════════════
+// 15. THE `this` KEYWORD
+// ═══════════════════════════════════════════════════════════
+
+// 1. global scope
+console.log(this); // window (browser script)
+
+// 2. normal function
 function showThisValue() {
-    console.log(this);
+    console.log(this); // window (non-strict) / undefined (strict)
 }
-showThisValue(); // Non-strict browser script mein: window
-// Strict mode / ES module mein: undefined
+showThisValue();
 
-// 3. OBJECT METHOD
+// 3. object method
 const studentObject = {
     studentName: "Ibrahim",
     studentAge: 14,
+
     showStudentDetails() {
-        console.log(this); // studentObject
-        console.log(this.studentName); // Ibrahim
-        console.log(this.studentAge); // 14
+        console.log(this);              // studentObject
+        console.log(this.studentName);  // Ibrahim
+        console.log(this.studentAge);   // 14
     }
 };
 studentObject.showStudentDetails();
 
-// 4. ARROW FUNCTION
-// Arrow function apna this nahi banata; surrounding scope se leta hai.
+// 4. arrow function → no own `this`, takes from outer scope
 const teacherObject = {
     teacherName: "Ahmed",
+
     showTeacherName: () => {
-        console.log(this.teacherName); // Usually undefined in a browser script
+        console.log(this.teacherName); // undefined
     }
 };
 teacherObject.showTeacherName();
 
-// 5. FUNCTION SEPARATELY CALL KARNA
+// 5. function called separately → loses `this`
 const showStudentName = studentObject.showStudentDetails;
-showStudentName(); // Non-strict browser script: this = window
-// Strict mode / ES module: this = undefined
+showStudentName(); // window (non-strict) / undefined (strict)
 
-// 6. CALL(): Manually this set karna.
+// 6. call() → manually set `this`
 function showPersonName() {
     console.log(this.personName);
 }
 const personObject = { personName: "Ali" };
 showPersonName.call(personObject); // Ali
 
-// 7. APPLY(): call() jaisa, arguments array mein pass hote hain.
+// 7. apply() → like call, args in array
 function introducePerson(city, country) {
     console.log(`${this.personName} lives in ${city}, ${country}.`);
 }
 introducePerson.apply(personObject, ["Delhi", "India"]);
 
-// 8. BIND(): Naya function banata hai jiska this fix hota hai.
+// 8. bind() → returns new function with fixed `this`
 const boundPersonFunction = introducePerson.bind(personObject, "Delhi", "India");
 boundPersonFunction();
 
-// 9. CONSTRUCTOR FUNCTION
+// 9. constructor function → `this` = new object
 function StudentConstructor(studentName) {
     this.studentName = studentName;
 }
 const newStudent = new StudentConstructor("Ibrahim");
 console.log(newStudent.studentName); // Ibrahim
 
-// 10. CLASS
+// 10. class → `this` = instance
 class Animal {
     constructor(animalName) {
         this.animalName = animalName;
     }
+
     showAnimalName() {
         console.log(this.animalName);
     }
@@ -1633,21 +1716,23 @@ class Animal {
 const dogObject = new Animal("Bruno");
 dogObject.showAnimalName(); // Bruno
 
-// 11. NESTED NORMAL FUNCTION
+// 11. nested normal function → loses `this`
 const schoolObject = {
     schoolName: "Delhi School",
+
     showSchoolName() {
         function innerFunction() {
-            console.log(this); // Normal function: global object or undefined
+            console.log(this); // window / undefined
         }
         innerFunction();
     }
 };
 schoolObject.showSchoolName();
 
-// 12. ARROW FUNCTION INSIDE A METHOD
+// 12. arrow function inside method → keeps `this`
 const anotherStudent = {
     studentName: "Ibrahim",
+
     showNameLater() {
         const arrowFunction = () => {
             console.log(this.studentName); // Ibrahim
@@ -1657,35 +1742,42 @@ const anotherStudent = {
 };
 anotherStudent.showNameLater();
 
-// 1. OBJECT: Properties store data, methods perform actions.
+
+// ═══════════════════════════════════════════════════════════
+// 16. OBJECT-ORIENTED PROGRAMMING
+// ═══════════════════════════════════════════════════════════
+
+// 1. object literal
 const studentObjectOOP = {
     studentName: "Ibrahim",
     studentAge: 14,
+
     introduceStudent() {
         console.log(`${this.studentName} is ${this.studentAge} years old.`);
     }
 };
-studentObjectOOP.introduceStudent(); // Ibrahim is 14 years old.
+studentObjectOOP.introduceStudent();
 
-// 2. FACTORY FUNCTION: Creates and returns objects.
+// 2. factory function
 function createStudent(studentName, studentAge) {
     return { studentName, studentAge };
 }
 const firstStudent = createStudent("Ali", 15);
 
-// 3. CONSTRUCTOR FUNCTION: Creates objects using "new".
+// 3. constructor function
 function StudentConstructorOOP(studentName, studentAge) {
     this.studentName = studentName;
     this.studentAge = studentAge;
 }
 const secondStudent = new StudentConstructorOOP("Ahmed", 16);
 
-// 4. CLASS AND CONSTRUCTOR: A blueprint for creating objects.
+// 4. class
 class Person {
     constructor(personName, personAge) {
         this.personName = personName;
         this.personAge = personAge;
     }
+
     introducePerson() {
         console.log(`${this.personName} is ${this.personAge} years old.`);
     }
@@ -1693,80 +1785,85 @@ class Person {
 const personClassObject = new Person("Ibrahim", 14);
 personClassObject.introducePerson();
 
-// 5. INHERITANCE: A child class inherits from a parent class.
+// 5. inheritance
 class Student extends Person {
     constructor(personName, personAge, studentSubject) {
-        super(personName, personAge); // Calls the parent constructor.
+        super(personName, personAge);
         this.studentSubject = studentSubject;
     }
+
     studySubject() {
         console.log(`${this.personName} studies ${this.studentSubject}.`);
     }
 }
 const javascriptStudent = new Student("Ibrahim", 14, "JavaScript");
-javascriptStudent.introducePerson(); // Inherited method.
+javascriptStudent.introducePerson();
 javascriptStudent.studySubject();
 
-// 6. ENCAPSULATION: Private data is accessed through class methods.
+// 6. encapsulation (private field)
 class BankAccount {
-    #accountBalance = 0; // Private property.
+    #accountBalance = 0;
 
     depositMoney(depositAmount) {
         if (depositAmount > 0) this.#accountBalance += depositAmount;
     }
+
     get balance() {
-        return this.#accountBalance; // Getter.
+        return this.#accountBalance;
     }
 }
 const bankAccount = new BankAccount();
 bankAccount.depositMoney(500);
-console.log(bankAccount.balance); // 500
+console.log(bankAccount.balance);
 
-// 7. POLYMORPHISM: Same method name, different behaviour.
+// 7. polymorphism (method overriding)
 class AnimalPoly {
     makeSound() {
         console.log("Animal makes a sound.");
     }
 }
+
 class Dog extends AnimalPoly {
     makeSound() {
-        console.log("Dog barks."); // Method overriding.
+        console.log("Dog barks.");
     }
 }
 const polyDogObject = new Dog();
-polyDogObject.makeSound(); // Dog barks.
+polyDogObject.makeSound();
 
-// 8. STATIC METHOD: Called on the class, not its instance.
+// 8. static method
 class Calculator {
     static addNumbers(firstNumber, secondNumber) {
         return firstNumber + secondNumber;
     }
 }
-console.log(Calculator.addNumbers(10, 20)); // 30
+console.log(Calculator.addNumbers(10, 20));
 
-// 9. GETTERS AND SETTERS: Read and update properties with control.
+// 9. getters & setters
 class User {
     constructor(userName) {
         this._userName = userName;
     }
+
     get userName() {
         return this._userName;
     }
+
     set userName(newUserName) {
         if (newUserName.trim() !== "") this._userName = newUserName;
     }
 }
 const userObject = new User("Ibrahim");
-userObject.userName = "Ali"; // Setter.
-console.log(userObject.userName); // Getter: Ali
+userObject.userName = "Ali";
+console.log(userObject.userName);
 
-// 10. PROTOTYPE: Objects can inherit methods through their prototype.
-console.log(Object.getPrototypeOf(polyDogObject) === Dog.prototype); // true
+// 10. prototype
+console.log(Object.getPrototypeOf(polyDogObject) === Dog.prototype);
 
-// 11. DESTRUCTURING: Extract properties into variables.
+// 11. destructuring
 const { studentName, studentAge: firstStudentAge } = firstStudent;
 console.log(studentName, firstStudentAge); // Ali 15
 
-// 12. SPREAD: Copy an object's own enumerable properties.
+// 12. spread
 const copiedStudent = { ...firstStudent, studentAge: 16 };
-console.log(copiedStudent); // { studentName: "Ali", studentAge: 16 }
+console.log(copiedStudent);
