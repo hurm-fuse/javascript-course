@@ -1640,207 +1640,654 @@ closures();
 
 
 // ═══════════════════════════════════════════════════════════
-// 15. THE `this` KEYWORD
+// 15. THIS KEYWORD IN JAVASCRIPT
 // ═══════════════════════════════════════════════════════════
 
-// 1. global scope
-console.log(this); // window (browser script)
+/*
+========================================================
+                 THIS KEYWORD IN JAVASCRIPT
+========================================================
 
-// 2. normal function
-function showThisValue() {
-    console.log(this); // window (non-strict) / undefined (strict)
-}
-showThisValue();
+`this` ek special keyword hai.
 
-// 3. object method
-const studentObject = {
+Iski value is baat par depend karti hai ki function
+KO KAISE CALL kiya gaya hai.
+
+Yaad rakh:
+- Object ke method mein: usually woh object.
+- Normal function mein: strict mode mein undefined.
+- Arrow function mein: surrounding scope ka `this`.
+- Class ke method mein: jis instance se method call hua.
+*/
+
+
+// ======================================================
+// 1. `this` INSIDE AN OBJECT METHOD
+// ======================================================
+
+const studentInformation = {
+    studentFullName: "Ibrahim Ahmad",
+    studentAgeInYears: 14,
+
+    displayStudentInformation: function () {
+
+        // `this` yahan studentInformation object ko refer karta hai.
+        // Kyunki function call hua: studentInformation.displayStudentInformation()
+
+        console.log(this.studentFullName);
+        console.log(this.studentAgeInYears);
+    }
+};
+
+studentInformation.displayStudentInformation();
+
+// Output:
+// Ibrahim Ahmad
+// 14
+
+
+// ======================================================
+// 2. WHY USE `this` INSTEAD OF THE OBJECT NAME?
+// ======================================================
+
+const firstStudentProfile = {
     studentName: "Ibrahim",
-    studentAge: 14,
 
-    showStudentDetails() {
-        console.log(this);              // studentObject
-        console.log(this.studentName);  // Ibrahim
-        console.log(this.studentAge);   // 14
+    introduceStudent: function () {
+
+        // Hardcode object name karne ke bajaye `this` use kar sakte hain.
+        console.log("My name is " + this.studentName);
     }
 };
-studentObject.showStudentDetails();
 
-// 4. arrow function → no own `this`, takes from outer scope
-const teacherObject = {
-    teacherName: "Ahmed",
+firstStudentProfile.introduceStudent();
 
-    showTeacherName: () => {
-        console.log(this.teacherName); // undefined
+// Output: My name is Ibrahim
+
+
+// ======================================================
+// 3. SAME METHOD, DIFFERENT OBJECTS
+// ======================================================
+
+const secondStudentProfile = {
+    studentName: "Ali",
+    introduceStudent: firstStudentProfile.introduceStudent
+};
+
+firstStudentProfile.introduceStudent();
+// `this` = firstStudentProfile
+// Output: My name is Ibrahim
+
+secondStudentProfile.introduceStudent();
+// `this` = secondStudentProfile
+// Output: My name is Ali
+
+// IMPORTANT:
+// Function same hai, lekin `this` alag hai.
+// Kyunki function ko call karne wala object alag hai.
+
+
+// ======================================================
+// 4. `this` IN A NORMAL FUNCTION
+// ======================================================
+
+"use strict";
+
+function showCurrentThisValue() {
+
+    // Strict mode mein normal function ko directly call karne par
+    // `this` ki value undefined hoti hai.
+    console.log(this);
+}
+
+showCurrentThisValue();
+
+// Output: undefined
+
+// Note:
+// Browser mein non-strict normal function ke andar `this`
+// globalThis (usually window) ho sakta hai.
+// Node.js mein top-level behavior context ke hisaab se badal sakta hai.
+// Isliye normal function mein `this` ko hamesha object mat samajhna.
+
+
+// ======================================================
+// 5. `this` IN AN ARROW FUNCTION
+// ======================================================
+
+const studentWithArrowMethod = {
+    studentName: "Ibrahim",
+
+    introduceStudent: () => {
+
+        // Arrow function apna khud ka `this` create NAHI karta.
+        // Yeh surrounding scope se `this` leta hai.
+        console.log(this);
     }
 };
-teacherObject.showTeacherName();
 
-// 5. function called separately → loses `this`
-const showStudentName = studentObject.showStudentDetails;
-showStudentName(); // window (non-strict) / undefined (strict)
+studentWithArrowMethod.introduceStudent();
 
-// 6. call() → manually set `this`
-function showPersonName() {
-    console.log(this.personName);
-}
-const personObject = { personName: "Ali" };
-showPersonName.call(personObject); // Ali
+// IMPORTANT:
+// Yahan `this` studentWithArrowMethod nahi hai.
+// Arrow function ka `this` surrounding scope se aata hai.
+// Isliye object methods ke liye normal method syntax use karna
+// generally zyada simple aur predictable hota hai.
 
-// 7. apply() → like call, args in array
-function introducePerson(city, country) {
-    console.log(`${this.personName} lives in ${city}, ${country}.`);
-}
-introducePerson.apply(personObject, ["Delhi", "India"]);
 
-// 8. bind() → returns new function with fixed `this`
-const boundPersonFunction = introducePerson.bind(personObject, "Delhi", "India");
-boundPersonFunction();
+// ======================================================
+// 6. `this` IN A CLASS
+// ======================================================
 
-// 9. constructor function → `this` = new object
-function StudentConstructor(studentName) {
-    this.studentName = studentName;
-}
-const newStudent = new StudentConstructor("Ibrahim");
-console.log(newStudent.studentName); // Ibrahim
+class StudentProfile {
 
-// 10. class → `this` = instance
-class Animal {
-    constructor(animalName) {
-        this.animalName = animalName;
+    constructor(studentName, studentAge) {
+
+        // `new StudentProfile(...)` ek naya object banata hai.
+        // Constructor ke andar `this` us naye object ko refer karta hai.
+
+        this.studentName = studentName;
+        this.studentAge = studentAge;
     }
 
-    showAnimalName() {
-        console.log(this.animalName);
+    displayProfile() {
+
+        // Jab studentOne.displayProfile() call hota hai,
+        // `this` studentOne ko refer karta hai.
+
+        console.log("Name: " + this.studentName);
+        console.log("Age: " + this.studentAge);
     }
 }
-const dogObject = new Animal("Bruno");
-dogObject.showAnimalName(); // Bruno
 
-// 11. nested normal function → loses `this`
-const schoolObject = {
-    schoolName: "Delhi School",
+const studentOne = new StudentProfile("Ibrahim", 14);
+const studentTwo = new StudentProfile("Ali", 15);
 
-    showSchoolName() {
-        function innerFunction() {
-            console.log(this); // window / undefined
+studentOne.displayProfile();
+// Name: Ibrahim
+// Age: 14
+
+studentTwo.displayProfile();
+// Name: Ali
+// Age: 15
+
+
+// ======================================================
+// 7. WHAT HAPPENS IF YOU SAVE A METHOD SEPARATELY?
+// ======================================================
+
+const schoolStudent = {
+    studentName: "Ibrahim",
+
+    introduceStudent: function () {
+        console.log(this.studentName);
+    }
+};
+
+const savedIntroductionFunction = schoolStudent.introduceStudent;
+
+// Yahan function ko object ke through call nahi kiya.
+// Isliye normal function ka `this` apna original object
+// automatically retain nahi karta.
+
+savedIntroductionFunction();
+
+// Strict mode mein output: undefined
+// (Agar kisi non-strict environment mein ho, behavior alag ho sakta hai.)
+
+
+// ======================================================
+// 8. FIX IT WITH `bind()`
+// ======================================================
+
+const boundIntroductionFunction =
+    schoolStudent.introduceStudent.bind(schoolStudent);
+
+// `bind()` ek naya function return karta hai jiska `this`
+// schoolStudent se permanently bound hota hai.
+
+boundIntroductionFunction();
+
+// Output: Ibrahim
+
+
+// ======================================================
+// 9. `call()` AND `apply()`
+// ======================================================
+
+function introducePerson(personCity, personCountry) {
+
+    console.log(
+        this.personName +
+        " lives in " +
+        personCity +
+        ", " +
+        personCountry
+    );
+}
+
+const personInformation = {
+    personName: "Ibrahim"
+};
+
+// `call()` arguments ko individually pass karta hai.
+introducePerson.call(personInformation, "Delhi", "India");
+
+// Output: Ibrahim lives in Delhi, India
+
+
+// `apply()` arguments ko array ke andar pass karta hai.
+introducePerson.apply(personInformation, ["Delhi", "India"]);
+
+// Output: Ibrahim lives in Delhi, India
+
+
+// ======================================================
+// 10. `this` INSIDE A NESTED NORMAL FUNCTION
+// ======================================================
+
+const classroomInformation = {
+    classroomName: "JavaScript Class",
+
+    showClassroomName: function () {
+
+        console.log(this.classroomName);
+        // Yahan `this` = classroomInformation.
+
+        function showInnerFunctionThis() {
+
+            // Yeh ek separate normal function hai.
+            // Strict mode mein iska `this` undefined hoga.
+            console.log(this);
         }
-        innerFunction();
+
+        showInnerFunctionThis();
     }
 };
-schoolObject.showSchoolName();
 
-// 12. arrow function inside method → keeps `this`
-const anotherStudent = {
-    studentName: "Ibrahim",
+classroomInformation.showClassroomName();
 
-    showNameLater() {
-        const arrowFunction = () => {
-            console.log(this.studentName); // Ibrahim
+// Output:
+// JavaScript Class
+// undefined
+
+
+// ======================================================
+// 11. ARROW FUNCTION CAN USE OUTER `this`
+// ======================================================
+
+const anotherClassroomInformation = {
+    classroomName: "Advanced JavaScript",
+
+    showClassroomName: function () {
+
+        // Is method mein `this` = anotherClassroomInformation.
+
+        const showClassroomUsingArrow = () => {
+
+            // Arrow function surrounding method ka `this` use karta hai.
+            console.log(this.classroomName);
         };
-        arrowFunction();
+
+        showClassroomUsingArrow();
     }
 };
-anotherStudent.showNameLater();
+
+anotherClassroomInformation.showClassroomName();
+
+// Output: Advanced JavaScript
 
 
-// ═══════════════════════════════════════════════════════════
-// 16. OBJECT-ORIENTED PROGRAMMING
-// ═══════════════════════════════════════════════════════════
+// ======================================================
+// 12. QUICK SUMMARY
+// ======================================================
 
-// 1. object literal
-const studentObjectOOP = {
-    studentName: "Ibrahim",
-    studentAge: 14,
+// object.method()       -> `this` = object
+// normalFunction()      -> strict mode mein undefined
+// arrowFunction()       -> surrounding scope ka `this`
+// new MyClass()         -> constructor mein `this` = new instance
+// function.bind(obj)    -> `this` ko obj se bind karta hai
+// function.call(obj, x) -> `this` = obj; arguments separately
+// function.apply(obj, arr) -> `this` = obj; arguments array mein
 
-    introduceStudent() {
-        console.log(`${this.studentName} is ${this.studentAge} years old.`);
+
+// ============================================================
+// OOP IN JAVASCRIPT — OBJECT-ORIENTED PROGRAMMING
+// ============================================================
+// OOP ka full form Object-Oriented Programming hai.
+// Ismein hum data (properties) aur actions (methods) ko objects
+// ke through organize karte hain.
+
+
+// ============================================================
+// 1. OBJECT, PROPERTIES AUR METHODS
+// ============================================================
+
+// Object ek container ki tarah hai jo related data aur functions
+// ko ek jagah rakhta hai.
+
+const oopStudentObject = {
+    studentName: "Ibrahim", // Property: student ka naam
+    studentAge: 14,         // Property: student ki age
+    studentSubject: "JavaScript",
+
+    // Object ke andar function ko METHOD kehte hain.
+    introduceStudent: function () {
+        console.log(`My name is ${this.studentName}.`);
+        console.log(`My age is ${this.studentAge}.`);
     }
 };
-studentObjectOOP.introduceStudent();
 
-// 2. factory function
+// Dot notation se property ki value access karte hain.
+console.log(oopStudentObject.studentName); // Ibrahim
+console.log(oopStudentObject.studentAge);  // 14
+
+// Object ka method call kar rahe hain.
+oopStudentObject.introduceStudent();
+
+
+// ============================================================
+// 2. ADD, UPDATE AUR DELETE PROPERTIES
+// ============================================================
+
+// Nayi property add karna.
+oopStudentObject.studentCity = "Delhi";
+
+// Existing property ki value update karna.
+oopStudentObject.studentAge = 15;
+
+// Property delete karna.
+delete oopStudentObject.studentCity;
+
+console.log(oopStudentObject);
+
+
+// ============================================================
+// 3. THIS KEYWORD
+// ============================================================
+
+// Normal method call mein "this" us object ko refer karta hai
+// jiske through method call hua hai.
+
+const oopTeacherObject = {
+    teacherName: "Ahmed",
+    teacherSubject: "Programming",
+
+    introduceTeacher() {
+        console.log(this.teacherName);
+        console.log(this.teacherSubject);
+    }
+};
+
+oopTeacherObject.introduceTeacher();
+// Ahmed
+// Programming
+
+// Yahan this.teacherName ka matlab oopTeacherObject.teacherName hai.
+// Yaad rakh: arrow functions apna khud ka "this" nahi banate.
+
+
+// ============================================================
+// 4. FACTORY FUNCTION
+// ============================================================
+
+// Factory function ek normal function hai jo objects create
+// karke return karta hai. Ismein "new" ki zaroorat nahi hoti.
+
 function createStudent(studentName, studentAge) {
-    return { studentName, studentAge };
-}
-const firstStudent = createStudent("Ali", 15);
 
-// 3. constructor function
-function StudentConstructorOOP(studentName, studentAge) {
+    // Har function call par naya object banega.
+    const newlyCreatedStudent = {
+        studentName: studentName,
+        studentAge: studentAge
+    };
+
+    return newlyCreatedStudent; // Object return kar rahe hain.
+}
+
+const firstStudent = createStudent("Ibrahim", 14);
+const secondStudent = createStudent("Ahmed", 15);
+
+console.log(firstStudent.studentName);  // Ibrahim
+console.log(secondStudent.studentName); // Ahmed
+
+
+// ============================================================
+// 5. CONSTRUCTOR FUNCTION AUR NEW KEYWORD
+// ============================================================
+
+// Constructor function bhi objects banane ka tareeka hai.
+// Convention ke according naam CapitalLetter se shuru hota hai.
+
+function oopStudentConstructor(studentName, studentAge) {
+
+    // "new" se call hone par "this" naye object ko refer karta hai.
     this.studentName = studentName;
     this.studentAge = studentAge;
 }
-const secondStudent = new StudentConstructorOOP("Ahmed", 16);
 
-// 4. class
-class Person {
-    constructor(personName, personAge) {
-        this.personName = personName;
-        this.personAge = personAge;
+const thirdStudent = new oopStudentConstructor("Ali", 16);
+
+console.log(thirdStudent.studentName); // Ali
+console.log(thirdStudent.studentAge);  // 16
+
+// "new" naya object create karta hai aur constructor ko us object
+// ke saath call karta hai.
+
+
+// ============================================================
+// 6. CLASS, CONSTRUCTOR AUR OBJECTS
+// ============================================================
+
+// Class ek blueprint hai.
+// Isse hum same structure wale multiple objects bana sakte hain.
+
+class OopStudent {
+
+    // Constructor tab chalta hai jab "new OopStudent(...)" hota hai.
+    constructor(studentName, studentAge) {
+
+        // Parameters ki values naye object mein save hoti hain.
+        this.studentName = studentName;
+        this.studentAge = studentAge;
     }
 
-    introducePerson() {
-        console.log(`${this.personName} is ${this.personAge} years old.`);
+    // Class ke andar method likhne ke liye function keyword
+    // likhne ki zaroorat nahi hoti.
+    introduceStudent() {
+        console.log(`My name is ${this.studentName}.`);
+        console.log(`My age is ${this.studentAge}.`);
+    }
+
+    studySubject(subjectName) {
+        console.log(`${this.studentName} is learning ${subjectName}.`);
     }
 }
-const personClassObject = new Person("Ibrahim", 14);
-personClassObject.introducePerson();
 
-// 5. inheritance
-class Student extends Person {
-    constructor(personName, personAge, studentSubject) {
-        super(personName, personAge);
-        this.studentSubject = studentSubject;
+const studentOneOop = new OopStudent("Ibrahim", 14);
+const studentTwoOop = new OopStudent("Ahmed", 15);
+
+// Dono objects same class se bane hain, lekin data alag hai.
+studentOneOop.introduceStudent();
+studentOneOop.studySubject("JavaScript");
+
+studentTwoOop.introduceStudent();
+studentTwoOop.studySubject("Python");
+
+
+// ============================================================
+// 7. INHERITANCE — EXTENDS AUR SUPER
+// ============================================================
+
+// Inheritance ka matlab ek class doosri class ke features inherit
+// kar sakti hai.
+// OopStudent class parent hai; ProgrammingStudent child class hai.
+
+class ProgrammingStudent extends OopStudent {
+
+    constructor(studentName, studentAge, programmingLanguage) {
+
+        // super() parent class ka constructor call karta hai.
+        // Derived class mein "this" use karne se pehle super() zaroori hai.
+        super(studentName, studentAge);
+
+        // Child class ki additional property.
+        this.programmingLanguage = programmingLanguage;
     }
 
-    studySubject() {
-        console.log(`${this.personName} studies ${this.studentSubject}.`);
+    writeCode() {
+        console.log(
+            `${this.studentName} is coding in ${this.programmingLanguage}.`
+        );
     }
 }
-const javascriptStudent = new Student("Ibrahim", 14, "JavaScript");
-javascriptStudent.introducePerson();
-javascriptStudent.studySubject();
 
-// 6. encapsulation (private field)
+const programmingStudent = new ProgrammingStudent(
+    "Ibrahim",
+    14,
+    "JavaScript"
+);
+
+// Parent class se inherited method.
+programmingStudent.introduceStudent();
+
+// Child class ka apna method.
+programmingStudent.writeCode();
+
+
+// ============================================================
+// 8. ENCAPSULATION — PRIVATE PROPERTIES
+// ============================================================
+
+// Encapsulation data ko protect karne aur controlled access dene
+// ka concept hai.
+// "#" se shuru hone wali property class ke bahar directly accessible nahi.
+
 class BankAccount {
-    #accountBalance = 0;
+
+    #accountBalance = 0; // Private property
 
     depositMoney(depositAmount) {
-        if (depositAmount > 0) this.#accountBalance += depositAmount;
+
+        // Validation: sirf positive amount deposit hogi.
+        if (depositAmount > 0) {
+            this.#accountBalance += depositAmount;
+        } else {
+            console.log("Deposit amount must be positive.");
+        }
     }
 
+    // Getter balance ko read karne ka controlled tareeka hai.
     get balance() {
         return this.#accountBalance;
     }
 }
-const bankAccount = new BankAccount();
-bankAccount.depositMoney(500);
-console.log(bankAccount.balance);
 
-// 7. polymorphism (method overriding)
-class AnimalPoly {
+const studentBankAccount = new BankAccount();
+
+studentBankAccount.depositMoney(500);
+
+console.log(studentBankAccount.balance); // 500
+
+// studentBankAccount.#accountBalance;
+// Error: private property class ke bahar access nahi kar sakte.
+
+
+// ============================================================
+// 9. POLYMORPHISM — METHOD OVERRIDING
+// ============================================================
+
+// Polymorphism ka ek example: same method name, different behaviour.
+// Child class parent ka method override kar sakti hai.
+
+class OopAnimal {
+
     makeSound() {
         console.log("Animal makes a sound.");
     }
 }
 
-class Dog extends AnimalPoly {
+class OopDog extends OopAnimal {
+
     makeSound() {
         console.log("Dog barks.");
     }
 }
-const polyDogObject = new Dog();
-polyDogObject.makeSound();
 
-// 8. static method
-class Calculator {
+class OopCat extends OopAnimal {
+
+    makeSound() {
+        console.log("Cat meows.");
+    }
+}
+
+const oopDogObject = new OopDog();
+const oopCatObject = new OopCat();
+
+oopDogObject.makeSound(); // Dog barks.
+oopCatObject.makeSound(); // Cat meows.
+
+
+// ============================================================
+// 10. ABSTRACTION — IMPLEMENTATION DETAILS HIDE KARNA
+// ============================================================
+
+// Abstraction mein user ko simple interface milta hai.
+// Internal steps ko use karne ke liye unki saari details
+// jaanna zaroori nahi hota.
+
+class CoffeeMachine {
+
+    makeCoffee() {
+        this.heatWater();
+        this.brewCoffee();
+        console.log("Your coffee is ready!");
+    }
+
+    heatWater() {
+        console.log("Heating water...");
+    }
+
+    brewCoffee() {
+        console.log("Brewing coffee...");
+    }
+}
+
+const coffeeMachine = new CoffeeMachine();
+
+// User ko sirf makeCoffee() call karna hai.
+coffeeMachine.makeCoffee();
+
+
+// ============================================================
+// 11. STATIC METHODS
+// ============================================================
+
+// Static method class par call hota hai, instance par nahi.
+// Isse utility operations ke liye use kar sakte hain.
+
+class OopCalculator {
+
     static addNumbers(firstNumber, secondNumber) {
         return firstNumber + secondNumber;
     }
 }
-console.log(Calculator.addNumbers(10, 20));
 
-// 9. getters & setters
-class User {
+console.log(OopCalculator.addNumbers(10, 20)); // 30
+
+// const calculator = new OopCalculator();
+// calculator.addNumbers(10, 20); // Error: instance method nahi hai.
+
+
+// ============================================================
+// 12. GETTERS AUR SETTERS
+// ============================================================
+
+// Getter property ko read karne deta hai.
+// Setter property update karte waqt validation laga sakta hai.
+
+class UserProfile {
+
     constructor(userName) {
         this._userName = userName;
     }
@@ -1850,20 +2297,81 @@ class User {
     }
 
     set userName(newUserName) {
-        if (newUserName.trim() !== "") this._userName = newUserName;
+
+        // Empty username accept nahi karenge.
+        if (newUserName.trim() !== "") {
+            this._userName = newUserName;
+        }
     }
 }
-const userObject = new User("Ibrahim");
-userObject.userName = "Ali";
-console.log(userObject.userName);
 
-// 10. prototype
-console.log(Object.getPrototypeOf(polyDogObject) === Dog.prototype);
+const userProfile = new UserProfile("Ibrahim");
 
-// 11. destructuring
-const { studentName, studentAge: firstStudentAge } = firstStudent;
-console.log(studentName, firstStudentAge); // Ali 15
+// Getter ko property ki tarah access karte hain.
+console.log(userProfile.userName); // Ibrahim
 
-// 12. spread
-const copiedStudent = { ...firstStudent, studentAge: 16 };
-console.log(copiedStudent);
+// Setter ko assignment ki tarah use karte hain.
+userProfile.userName = "Ali";
+
+console.log(userProfile.userName); // Ali
+
+
+// ============================================================
+// 13. PROTOTYPES
+// ============================================================
+
+// JavaScript prototype-based language hai.
+// Objects apne prototype se methods aur properties inherit kar sakte hain.
+// Class ke methods aam taur par class ke prototype par store hote hain.
+
+class Vehicle {
+
+    constructor(vehicleBrand) {
+        this.vehicleBrand = vehicleBrand;
+    }
+
+    startVehicle() {
+        console.log(`${this.vehicleBrand} is starting.`);
+    }
+}
+
+const carObject = new Vehicle("Toyota");
+
+carObject.startVehicle();
+
+console.log(
+    Object.getPrototypeOf(carObject) === Vehicle.prototype
+); // true
+
+// vehicleBrand object ki apni property hai.
+console.log(carObject.hasOwnProperty("vehicleBrand")); // true
+
+// startVehicle prototype par hai, carObject par directly nahi.
+console.log(carObject.hasOwnProperty("startVehicle")); // false
+
+
+// ============================================================
+// 14. OBJECT DESTRUCTURING AUR SPREAD
+// ============================================================
+
+const bookObject = {
+    bookTitle: "The Metamorphosis",
+    bookAuthor: "Franz Kafka"
+};
+
+// Destructuring: object ki properties ko variables mein nikaalna.
+const { bookTitle, bookAuthor } = bookObject;
+
+console.log(bookTitle);  // The Metamorphosis
+console.log(bookAuthor); // Franz Kafka
+
+// Spread: object ki own enumerable properties ko copy karna.
+// Ye shallow copy hai.
+const copiedBook = { ...bookObject, bookYear: 1915 };
+
+console.log(copiedBook);
+
+
+// ============================================================
+// END OF OOP IN JAVASCRIPT
+// ============================================================
