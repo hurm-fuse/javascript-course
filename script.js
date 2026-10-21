@@ -2010,7 +2010,7 @@ class createmobile {
         this.price = price;
         this.color = color;
     }
- 
+
     write(text) {
         let createmobileh1 = document.createElement("h1");
         createmobileh1.textContent = text;
@@ -2019,7 +2019,89 @@ class createmobile {
     }
 }
 
-let createmobile1 = new createmobile("nokia 14", "nokia", "$10k","blue");
-let createmobile2 = new createmobile("iphone 67", "apple", "$100k","green");
+let createmobile1 = new createmobile("nokia 14", "nokia", "$10k", "blue");
+let createmobile2 = new createmobile("iphone 67", "apple", "$100k", "green");
 console.log(createmobile1.write("heyyyyyyy"));
 console.log(createmobile2.write("heyyyyyyy"));
+
+// sync async
+// aesa code jo line by line hota hai sync code
+// aesa code jo jab chalne ke liye ready ho jaaye tab chale wo hai asyznc
+
+// callback
+// ek function ko agar aap ek aur function bhej de rahe ho paremeter mein tu wu paremeter wala function kahlata hai callback
+function kuchderbaadchalunga(fnc) {
+    setTimeout(fnc, Math.floor(Math.random() * 10 * 1000))
+}
+kuchderbaadchalunga(function () {
+    console.log("heyyyy");
+})
+// callback hell
+function profilelekaraao(username, cb) {
+    setTimeout(() => {
+        console.log(`profile fetched of ${username}`);
+        cb({ username, age: 26, email: "ibu@gmail.com" });
+    }, 2000);
+}
+function photoslekaraao(username, cb) {
+    setTimeout(() => {
+        console.log(`photos fetched of ${username}`);
+        cb(["profile.jpg", "cover.jpg", "coding.jpg"]);
+    }, 2000);
+}
+function followerslekaraao(username, cb) {
+    setTimeout(() => {
+        console.log(`followers fetched of ${username}`);
+        cb(["Ali", "Ahmed", "Zaid"]);
+    }, 2000);
+}
+function messageslekaraao(username, cb) {
+    setTimeout(() => {
+        console.log(`messages fetched of ${username}`);
+        cb(["Hello Ibrahim", "How are you?", "Let's code!"]);
+    }, 2000);
+}
+profilelekaraao("ibrahim", function (profiledata) {
+    console.log(profiledata);
+    photoslekaraao(profiledata.username, function (photos) {
+        console.log(photos);
+        followerslekaraao(profiledata.username, function (followers) {
+            console.log(followers);
+            messageslekaraao(profiledata.username, function (messages) {
+                console.log(messages);
+                console.log("all data fetched successfully!");
+            });
+        });
+    });
+});
+
+// promises
+// aap ek promise bnate ho jo ki do states main se ek state mai jaa sakta hai and wu yaa tu reslove hoga ya to reject hoga ab wu kya hoga ye to waqt pai depend krta hai par humein dono ke liye code likhna padega
+let promise = new Promise(function (res, rej) {
+    setTimeout(() => {
+        let randomnummber = Math.floor(Math.random() * 10);
+        if (randomnummber > 5) {
+            res("resolved with " + randomnummber);
+        } else {
+            rej("reject with " + randomnummber);
+        }
+    }, 2000);
+})
+// // if it reslove then "then" run
+// // if it reject then "catch" run
+// promise.then(function (val) {
+//     console.log(val);
+// }).catch(function (val) {
+//     console.log(val);
+// })
+
+// async and await
+async function asyncandawait() {
+    try {
+        let val = await promise;
+        console.log(val);
+    } catch (err) {
+        console.log(err);
+    }
+}
+asyncandawait();
