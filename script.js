@@ -1951,427 +1951,75 @@ anotherClassroomInformation.showClassroomName();
 // function.apply(obj, arr) -> `this` = obj; arguments array mein
 
 
-// ============================================================
-// OOP IN JAVASCRIPT — OBJECT-ORIENTED PROGRAMMING
-// ============================================================
-// OOP ka full form Object-Oriented Programming hai.
-// Ismein hum data (properties) aur actions (methods) ko objects
-// ke through organize karte hain.
+
+// Object Oriented Programming (Constructor Function)
+function createbiscuits(name, price, qty, company, category) {
+    this.name = name;
+    this.price = price;
+    this.qty = qty;
+    this.company = company;
+    this.category = category;
+}
+
+let bicuit1 = new createbiscuits("oreo", 5, 10, "cadbury", "chocalate");
+console.log(bicuit1);
+
+let bicuit2 = new createbiscuits("fantasy", 20, 3, "parle", "chocalate filled");
+console.log(bicuit2);
 
 
-// ============================================================
-// 1. OBJECT, PROPERTIES AUR METHODS
-// ============================================================
+// Factory / Constructor Function
+function Createpencil(name, price, color) {
+    this.name = name;
+    this.price = price;
+    this.color = color;
+}
 
-// Object ek container ki tarah hai jo related data aur functions
-// ko ek jagah rakhta hai.
+// Prototype mein company property add kar rahe hain
+Createpencil.prototype.company = "aethexweb";
 
-const oopStudentObject = {
-    studentName: "Ibrahim", // Property: student ka naam
-    studentAge: 14,         // Property: student ki age
-    studentSubject: "JavaScript",
+// Prototype mein write() method add kar rahe hain
+Createpencil.prototype.write = function (text) {
+    let factoryh1 = document.createElement("h1");
 
-    // Object ke andar function ko METHOD kehte hain.
-    introduceStudent: function () {
-        console.log(`My name is ${this.studentName}.`);
-        console.log(`My age is ${this.studentAge}.`);
-    }
+    factoryh1.textContent = text;
+    factoryh1.style.color = this.color;
+
+    document.body.append(factoryh1);
 };
 
-// Dot notation se property ki value access karte hain.
-console.log(oopStudentObject.studentName); // Ibrahim
-console.log(oopStudentObject.studentAge);  // 14
+// Pehla pencil object
+let pencil1 = new Createpencil("nataraj", 10, "black");
+console.log(pencil1);
+console.log(pencil1.company);
 
-// Object ka method call kar rahe hain.
-oopStudentObject.introduceStudent();
+// Dusra pencil object
+let pencil2 = new Createpencil("dom", 10, "red");
+console.log(pencil2);
+console.log(pencil2.company);
 
+// Dono pencils se likhwao
+pencil1.write("kya hal chal");
+pencil2.write("kaise hu ustad");
 
-// ============================================================
-// 2. ADD, UPDATE AUR DELETE PROPERTIES
-// ============================================================
-
-// Nayi property add karna.
-oopStudentObject.studentCity = "Delhi";
-
-// Existing property ki value update karna.
-oopStudentObject.studentAge = 15;
-
-// Property delete karna.
-delete oopStudentObject.studentCity;
-
-console.log(oopStudentObject);
-
-
-// ============================================================
-// 3. THIS KEYWORD
-// ============================================================
-
-// Normal method call mein "this" us object ko refer karta hai
-// jiske through method call hua hai.
-
-const oopTeacherObject = {
-    teacherName: "Ahmed",
-    teacherSubject: "Programming",
-
-    introduceTeacher() {
-        console.log(this.teacherName);
-        console.log(this.teacherSubject);
+// class
+class createmobile {
+    constructor(name, company, price, color) {
+        this.name = name;
+        this.company = company;
+        this.price = price;
+        this.color = color;
     }
-};
-
-oopTeacherObject.introduceTeacher();
-// Ahmed
-// Programming
-
-// Yahan this.teacherName ka matlab oopTeacherObject.teacherName hai.
-// Yaad rakh: arrow functions apna khud ka "this" nahi banate.
-
-
-// ============================================================
-// 4. FACTORY FUNCTION
-// ============================================================
-
-// Factory function ek normal function hai jo objects create
-// karke return karta hai. Ismein "new" ki zaroorat nahi hoti.
-
-function createStudent(studentName, studentAge) {
-
-    // Har function call par naya object banega.
-    const newlyCreatedStudent = {
-        studentName: studentName,
-        studentAge: studentAge
-    };
-
-    return newlyCreatedStudent; // Object return kar rahe hain.
-}
-
-const firstStudent = createStudent("Ibrahim", 14);
-const secondStudent = createStudent("Ahmed", 15);
-
-console.log(firstStudent.studentName);  // Ibrahim
-console.log(secondStudent.studentName); // Ahmed
-
-
-// ============================================================
-// 5. CONSTRUCTOR FUNCTION AUR NEW KEYWORD
-// ============================================================
-
-// Constructor function bhi objects banane ka tareeka hai.
-// Convention ke according naam CapitalLetter se shuru hota hai.
-
-function oopStudentConstructor(studentName, studentAge) {
-
-    // "new" se call hone par "this" naye object ko refer karta hai.
-    this.studentName = studentName;
-    this.studentAge = studentAge;
-}
-
-const thirdStudent = new oopStudentConstructor("Ali", 16);
-
-console.log(thirdStudent.studentName); // Ali
-console.log(thirdStudent.studentAge);  // 16
-
-// "new" naya object create karta hai aur constructor ko us object
-// ke saath call karta hai.
-
-
-// ============================================================
-// 6. CLASS, CONSTRUCTOR AUR OBJECTS
-// ============================================================
-
-// Class ek blueprint hai.
-// Isse hum same structure wale multiple objects bana sakte hain.
-
-class OopStudent {
-
-    // Constructor tab chalta hai jab "new OopStudent(...)" hota hai.
-    constructor(studentName, studentAge) {
-
-        // Parameters ki values naye object mein save hoti hain.
-        this.studentName = studentName;
-        this.studentAge = studentAge;
-    }
-
-    // Class ke andar method likhne ke liye function keyword
-    // likhne ki zaroorat nahi hoti.
-    introduceStudent() {
-        console.log(`My name is ${this.studentName}.`);
-        console.log(`My age is ${this.studentAge}.`);
-    }
-
-    studySubject(subjectName) {
-        console.log(`${this.studentName} is learning ${subjectName}.`);
+ 
+    write(text) {
+        let createmobileh1 = document.createElement("h1");
+        createmobileh1.textContent = text;
+        createmobileh1.style.color = this.color;
+        document.body.appendChild(createmobileh1)
     }
 }
 
-const studentOneOop = new OopStudent("Ibrahim", 14);
-const studentTwoOop = new OopStudent("Ahmed", 15);
-
-// Dono objects same class se bane hain, lekin data alag hai.
-studentOneOop.introduceStudent();
-studentOneOop.studySubject("JavaScript");
-
-studentTwoOop.introduceStudent();
-studentTwoOop.studySubject("Python");
-
-
-// ============================================================
-// 7. INHERITANCE — EXTENDS AUR SUPER
-// ============================================================
-
-// Inheritance ka matlab ek class doosri class ke features inherit
-// kar sakti hai.
-// OopStudent class parent hai; ProgrammingStudent child class hai.
-
-class ProgrammingStudent extends OopStudent {
-
-    constructor(studentName, studentAge, programmingLanguage) {
-
-        // super() parent class ka constructor call karta hai.
-        // Derived class mein "this" use karne se pehle super() zaroori hai.
-        super(studentName, studentAge);
-
-        // Child class ki additional property.
-        this.programmingLanguage = programmingLanguage;
-    }
-
-    writeCode() {
-        console.log(
-            `${this.studentName} is coding in ${this.programmingLanguage}.`
-        );
-    }
-}
-
-const programmingStudent = new ProgrammingStudent(
-    "Ibrahim",
-    14,
-    "JavaScript"
-);
-
-// Parent class se inherited method.
-programmingStudent.introduceStudent();
-
-// Child class ka apna method.
-programmingStudent.writeCode();
-
-
-// ============================================================
-// 8. ENCAPSULATION — PRIVATE PROPERTIES
-// ============================================================
-
-// Encapsulation data ko protect karne aur controlled access dene
-// ka concept hai.
-// "#" se shuru hone wali property class ke bahar directly accessible nahi.
-
-class BankAccount {
-
-    #accountBalance = 0; // Private property
-
-    depositMoney(depositAmount) {
-
-        // Validation: sirf positive amount deposit hogi.
-        if (depositAmount > 0) {
-            this.#accountBalance += depositAmount;
-        } else {
-            console.log("Deposit amount must be positive.");
-        }
-    }
-
-    // Getter balance ko read karne ka controlled tareeka hai.
-    get balance() {
-        return this.#accountBalance;
-    }
-}
-
-const studentBankAccount = new BankAccount();
-
-studentBankAccount.depositMoney(500);
-
-console.log(studentBankAccount.balance); // 500
-
-// studentBankAccount.#accountBalance;
-// Error: private property class ke bahar access nahi kar sakte.
-
-
-// ============================================================
-// 9. POLYMORPHISM — METHOD OVERRIDING
-// ============================================================
-
-// Polymorphism ka ek example: same method name, different behaviour.
-// Child class parent ka method override kar sakti hai.
-
-class OopAnimal {
-
-    makeSound() {
-        console.log("Animal makes a sound.");
-    }
-}
-
-class OopDog extends OopAnimal {
-
-    makeSound() {
-        console.log("Dog barks.");
-    }
-}
-
-class OopCat extends OopAnimal {
-
-    makeSound() {
-        console.log("Cat meows.");
-    }
-}
-
-const oopDogObject = new OopDog();
-const oopCatObject = new OopCat();
-
-oopDogObject.makeSound(); // Dog barks.
-oopCatObject.makeSound(); // Cat meows.
-
-
-// ============================================================
-// 10. ABSTRACTION — IMPLEMENTATION DETAILS HIDE KARNA
-// ============================================================
-
-// Abstraction mein user ko simple interface milta hai.
-// Internal steps ko use karne ke liye unki saari details
-// jaanna zaroori nahi hota.
-
-class CoffeeMachine {
-
-    makeCoffee() {
-        this.heatWater();
-        this.brewCoffee();
-        console.log("Your coffee is ready!");
-    }
-
-    heatWater() {
-        console.log("Heating water...");
-    }
-
-    brewCoffee() {
-        console.log("Brewing coffee...");
-    }
-}
-
-const coffeeMachine = new CoffeeMachine();
-
-// User ko sirf makeCoffee() call karna hai.
-coffeeMachine.makeCoffee();
-
-
-// ============================================================
-// 11. STATIC METHODS
-// ============================================================
-
-// Static method class par call hota hai, instance par nahi.
-// Isse utility operations ke liye use kar sakte hain.
-
-class OopCalculator {
-
-    static addNumbers(firstNumber, secondNumber) {
-        return firstNumber + secondNumber;
-    }
-}
-
-console.log(OopCalculator.addNumbers(10, 20)); // 30
-
-// const calculator = new OopCalculator();
-// calculator.addNumbers(10, 20); // Error: instance method nahi hai.
-
-
-// ============================================================
-// 12. GETTERS AUR SETTERS
-// ============================================================
-
-// Getter property ko read karne deta hai.
-// Setter property update karte waqt validation laga sakta hai.
-
-class UserProfile {
-
-    constructor(userName) {
-        this._userName = userName;
-    }
-
-    get userName() {
-        return this._userName;
-    }
-
-    set userName(newUserName) {
-
-        // Empty username accept nahi karenge.
-        if (newUserName.trim() !== "") {
-            this._userName = newUserName;
-        }
-    }
-}
-
-const userProfile = new UserProfile("Ibrahim");
-
-// Getter ko property ki tarah access karte hain.
-console.log(userProfile.userName); // Ibrahim
-
-// Setter ko assignment ki tarah use karte hain.
-userProfile.userName = "Ali";
-
-console.log(userProfile.userName); // Ali
-
-
-// ============================================================
-// 13. PROTOTYPES
-// ============================================================
-
-// JavaScript prototype-based language hai.
-// Objects apne prototype se methods aur properties inherit kar sakte hain.
-// Class ke methods aam taur par class ke prototype par store hote hain.
-
-class Vehicle {
-
-    constructor(vehicleBrand) {
-        this.vehicleBrand = vehicleBrand;
-    }
-
-    startVehicle() {
-        console.log(`${this.vehicleBrand} is starting.`);
-    }
-}
-
-const carObject = new Vehicle("Toyota");
-
-carObject.startVehicle();
-
-console.log(
-    Object.getPrototypeOf(carObject) === Vehicle.prototype
-); // true
-
-// vehicleBrand object ki apni property hai.
-console.log(carObject.hasOwnProperty("vehicleBrand")); // true
-
-// startVehicle prototype par hai, carObject par directly nahi.
-console.log(carObject.hasOwnProperty("startVehicle")); // false
-
-
-// ============================================================
-// 14. OBJECT DESTRUCTURING AUR SPREAD
-// ============================================================
-
-const bookObject = {
-    bookTitle: "The Metamorphosis",
-    bookAuthor: "Franz Kafka"
-};
-
-// Destructuring: object ki properties ko variables mein nikaalna.
-const { bookTitle, bookAuthor } = bookObject;
-
-console.log(bookTitle);  // The Metamorphosis
-console.log(bookAuthor); // Franz Kafka
-
-// Spread: object ki own enumerable properties ko copy karna.
-// Ye shallow copy hai.
-const copiedBook = { ...bookObject, bookYear: 1915 };
-
-console.log(copiedBook);
-
-
-// ============================================================
-// END OF OOP IN JAVASCRIPT
-// ============================================================
+let createmobile1 = new createmobile("nokia 14", "nokia", "$10k","blue");
+let createmobile2 = new createmobile("iphone 67", "apple", "$100k","green");
+console.log(createmobile1.write("heyyyyyyy"));
+console.log(createmobile2.write("heyyyyyyy"));
